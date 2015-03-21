@@ -20,9 +20,13 @@ public class Mario implements MoveableObject{
 	
 	public Mario(Field field){
 		this.field = field;
+		jump = false;
+		movingLeft = false;
+		movingRight = false;
+		falling = true;
 		sizeX = 2;
 		sizeY = 3;
-		location = new Vector2(0,0);
+		location = new Vector2(32,32);
 	}
 	
 	public void inputUp(){
