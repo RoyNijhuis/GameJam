@@ -11,12 +11,16 @@ public class Block implements StaticObject {
 	private static Sprite sprite = new Sprite(new Texture(TEXTURE_PATH));
 	private Vector2 position;
 	
-	public Block(Vector2 position) {
+	public Block() {
+		
+	}
+	
+	public void setPosition(Vector2 position) {
 		this.position = position;
 	}
 	
 	@Override
 	public void render(SpriteBatch batch) {
-		batch.draw(sprite, position.x, position.y);
+		batch.draw(sprite, position.x*Main.SCALING_FACTOR.x, position.y*Main.SCALING_FACTOR.y, sprite.getWidth()*Main.SCALING_FACTOR.x, sprite.getHeight()*Main.SCALING_FACTOR.y);
 	}
 }

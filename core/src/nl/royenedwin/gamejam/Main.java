@@ -5,13 +5,16 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 
 public class Main extends ApplicationAdapter {
 	SpriteBatch batch;
 	Field field1;
+	public static Vector2 SCALING_FACTOR;
 	
 	@Override
 	public void create () {
+		SCALING_FACTOR = new Vector2(Gdx.graphics.getWidth()/1920f, Gdx.graphics.getHeight()/1088f);
 		batch = new SpriteBatch();
 		field1 = new Field();
 	}
