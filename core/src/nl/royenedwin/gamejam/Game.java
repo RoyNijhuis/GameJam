@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 public class Game implements Screen{
-	public static final String BACKGROUND_PATH = "background.jpg";
+	public static final String BACKGROUND_PATH = "background2.jpg";
 	private SpriteBatch batch;
 	private Sprite background;
 	private Field field1;
