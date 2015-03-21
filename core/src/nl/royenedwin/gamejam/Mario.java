@@ -31,7 +31,9 @@ public class Mario implements MoveableObject{
 	
 	public void inputUp(){
 		if(!falling && !jump){
+			jumpStartLocation = location;
 			jump = true;
+			
 		}
 	}
 	
