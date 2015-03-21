@@ -19,6 +19,7 @@ public class InputProcessor extends InputAdapter {
 		} else if(keycode == Keys.W || keycode == Keys.UP) {
 			mario.inputUp();
 		}
+		System.out.println("key down");
 		return true;
 	}
 	
@@ -28,6 +29,7 @@ public class InputProcessor extends InputAdapter {
 		} else if(keycode == Keys.D || keycode == Keys.RIGHT) {
 			mario.inputNoRight();
 		}
+		System.out.println("key up");
 		return true;
 	}
 }
