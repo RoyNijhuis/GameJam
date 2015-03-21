@@ -247,9 +247,12 @@ public class Mario implements MoveableObject{
 		}
 		Vector2 temp = new Vector2((int)location.x/32, (int)location.y/32);
 		if(!temp.equals(locationBlock)){
-			//TODO check collision
-			
+			collisionBlocks();
 		}
+	}
+	
+	private void collisionBlocks(){
+		
 	}
 
 	@Override
