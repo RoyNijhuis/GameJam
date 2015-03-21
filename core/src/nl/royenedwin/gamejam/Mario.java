@@ -67,7 +67,8 @@ public class Mario implements MoveableObject{
 	
 	private void physics(){
 		if(jump){
-			if((!field.fieldIsFull((int)(location.x/32), (int)(location.y/32) + sizeY+1)
+			if((!field.fieldIsFull((int)(location.x/32), (int)(location.y/32) + sizeY+1) &&
+					!field.fieldIsFull((int)((location.x+31)/32), (int)(location.y/32) + sizeY+1)
 					&& jumpStartLocation.y < location.y+96)){//TODO check field up
 				location.y += speedVer;
 				speedVer -=0.2;
@@ -76,25 +77,25 @@ public class Mario implements MoveableObject{
 					falling = true;
 				}
 			}  else {
-				if((int)(location.y%32) > 7){
+				if((int)(location.y%32) < 25){
 					location.y+=speedVer;
 					if(speedVer<=7){
 						speedVer+=0.2;
 					}
-				} else if((int)(location.y%32) == 2 && speedVer<location.y%32){
+				} else if((int)(location.y%32) == 31 && speedVer<32-location.y%32){
 					location.y+=speedVer;
-				} else if((int)(location.y%32) == 3 && speedVer<location.y%32){
+				} else if((int)(location.y%32) == 30 && speedVer<32-location.y%32){
 					location.y+=speedVer;
-				} else if((int)(location.y%32) == 4 && speedVer<location.y%32){
+				} else if((int)(location.y%32) == 29 && speedVer<32-location.y%32){
 					location.y+=speedVer;
-				} else if((int)(location.y%32) == 5 && speedVer<location.y%32){
+				} else if((int)(location.y%32) == 28 && speedVer<32-location.y%32){
 					location.y+=speedVer;
-				} else if((int)(location.y%32) == 6 && speedVer<location.y%32){
+				} else if((int)(location.y%32) == 27 && speedVer<32-location.y%32){
 					location.y+=speedVer;
-				} else if((int)(location.y%32) == 7 && speedVer<location.y%32){
+				} else if((int)(location.y%32) == 26 && speedVer<32-location.y%32){
 					location.y+=speedVer;
-				}else {
-					location.y+=location.y%32;
+				} else {
+					location.y+=32-location.y%32;
 					jump = false;
 					falling = true;
 					speedVer = 1;
