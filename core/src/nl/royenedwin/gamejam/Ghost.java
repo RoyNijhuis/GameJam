@@ -48,7 +48,7 @@ public class Ghost implements MoveableObject{
 		if(timePassed > 0){
 			timePassed -= delta;
 		}
-		if((int)(position.x/32) == (int)(marioPos.x/32) && (int)(position.y/32) == (int)(marioPos.y/32) && timePassed<0){
+		if((int)(position.x/32) == (int)(marioPos.x/32) && (int)(position.y/32) == (int)(marioPos.y/32) && timePassed<=0){
 			System.out.println("COLLISION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			mario.takeLive();
 			timePassed = 5;
