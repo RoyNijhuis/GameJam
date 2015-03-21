@@ -24,6 +24,9 @@ public class Field implements Drawable, Updateable{
 				} else if(tmp.getPixel(x, y) == -16776961) {
 					fields[x][y] = new Chest();
 					fields[x+1][y] = new Full();
+				} else if(tmp.getPixel(x, y) == 117375231) {
+					fields[x][y] = new Door();
+					fields[x][y+1] = new Full();
 				} else {
 					if(!(fields[x][y] instanceof Full)) {
 						fields[x][y] = null;
