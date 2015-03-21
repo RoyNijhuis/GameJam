@@ -72,6 +72,10 @@ public class Field implements Drawable, Updateable{
 					collidingObjects.add((Collidable) fields[x][y]);
 					fields[x][y-1] = new FullNotWalk();
 					
+				}  else if(color.r==0f && color.g==1f && color.b == 0.84705883f) {
+					//Light blue => trampoline
+					fields[x][y] = new Trampoline();
+					collidingObjects.add((Collidable) fields[x][y]);
 				}
 				else {
 					if(!(fields[x][y] instanceof FullWalk) && !(fields[x][y] instanceof FullNotWalk)) {
@@ -119,6 +123,19 @@ public class Field implements Drawable, Updateable{
 		}
 	}
 	
+	public boolean fieldHasTrampoline(int x, int y) {
+		boolean result = false;
+		StaticObject o = fields[x][33-y];
+		
+		if(o != null) {
+			if(o instanceof Trampoline) {
+				result = true;
+			}
+		}
+		
+		return result;
+	}
+	
 	public boolean fieldIsFull(int x, int y) {
 		
 		boolean result = false;
@@ -132,6 +149,9 @@ public class Field implements Drawable, Updateable{
 				result = true;
 			}
 			if(o instanceof Block) {
+				result = true;
+			}
+			if(o instanceof Trampoline) {
 				result = true;
 			}
 		}

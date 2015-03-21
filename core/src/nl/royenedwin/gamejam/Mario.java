@@ -123,6 +123,10 @@ public class Mario implements MoveableObject{
 		return field.fieldIsFull((int)(x/32),(int)(y/32));
 	}
 	
+	public boolean pointHasTrampoline(float x, float y) {
+		return field.fieldHasTrampoline((int)(x/32),(int)(y/32));
+	}
+	
 	public void shoot() {
 		if(lastFacedDirectionIsLeft) {
 			Main.createStone(new Vector2(location.x+sprite.getWidth()/2, location.y+sprite.getHeight()/2), new Vector2(-10,5));
@@ -159,6 +163,14 @@ public class Mario implements MoveableObject{
 			float movement = speedVer*delta;
 			boolean y = true;
 			for(int i = 0; i < movement; i++){
+				if(pointHasTrampoline((location.x),(location.y-i))||pointHasTrampoline((location.x+31),(location.y-i))) {
+					y = false;
+					location.y -= (i-1);
+					speedVer = speedVertNorm*1.5f;
+					falling = false;
+					jump = true;
+					break;
+				}
 				if((pointAtCord((location.x),(location.y-i))||pointAtCord((location.x+31),(location.y-i)))){
 					y = false;
 					location.y -= (i-1);
