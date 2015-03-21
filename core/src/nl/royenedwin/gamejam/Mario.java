@@ -290,6 +290,11 @@ public class Mario implements MoveableObject{
 		for(int i = 0; i<lives; i++){
 			batch.draw(heart, 10 + 74*i, 10, heart.getWidth()*Main.SCALING_FACTOR.x, heart.getHeight()*Main.SCALING_FACTOR.y);
 		}
+		int c = 0;
+		for(ChestItem z: chestItems){
+			c++;
+			batch.draw(z.getSprite(), 1900 - 74*c, 10, z.getSprite().getWidth()*Main.SCALING_FACTOR.x, z.getSprite().getHeight()*Main.SCALING_FACTOR.y);
+		}
 
 		if(lastFacedDirectionIsLeft) {
 			if(!sprite.isFlipX()) {

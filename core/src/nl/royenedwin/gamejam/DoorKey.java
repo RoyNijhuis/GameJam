@@ -35,4 +35,10 @@ public class DoorKey implements ChestItem {
 	public int getID() {
 		return id;
 	}
+
+	@Override
+	public Sprite getSprite() {
+		// TODO Auto-generated method stub
+		return sprite;
+	}
 }
