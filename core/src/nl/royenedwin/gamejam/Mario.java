@@ -37,11 +37,11 @@ public class Mario implements MoveableObject{
 		speedHor = 10;
 		speedVer = 10;
 		maxSpeedHor = 500;
-		maxSpeedVer = 500;
+		maxSpeedVer = 600;
 		speedHorNorm = 200;
 		speedVertNorm = 300;
 		horMult = 100;
-		vertMult = 400;
+		vertMult = 360;
 		location = new Vector2(100,500);
 	}
 	
@@ -94,7 +94,7 @@ public class Mario implements MoveableObject{
 			float movement = speedVer*delta;
 			boolean y = true;
 			for(int i = 0; i < movement; i++){
-				if((pointAtCord((location.x),(location.y+64+i))||pointAtCord((location.x+31),(location.y+64+i)))){
+				if((pointAtCord((location.x),(location.y+62+i))||pointAtCord((location.x+31),(location.y+62+i)))){
 					y = false;
 					location.y += (i-1);
 					jump = false;
@@ -139,7 +139,7 @@ public class Mario implements MoveableObject{
 			float movement = speedHor*delta;
 			boolean x = true;
 			for(int i = 0; i < movement; i++){
-				if((pointAtCord((location.x - i),(location.y))||pointAtCord((location.x - i),(location.y+32))||pointAtCord((location.x - i),(location.y+64)))){
+				if((pointAtCord((location.x - i),(location.y))||pointAtCord((location.x - i),(location.y+32))||pointAtCord((location.x - i),(location.y+62)))){
 					x = false;
 					location.x -= (i-1);
 					speedHor = speedHorNorm;
@@ -158,7 +158,7 @@ public class Mario implements MoveableObject{
 			float movement = speedHor*delta;
 			boolean x = true;
 			for(int i = 0; i < movement; i++){
-				if((pointAtCord((location.x + 32 + i),(location.y))||pointAtCord((location.x + 32 + i),(location.y+32))||pointAtCord((location.x + 32 + i),(location.y+64)))){
+				if((pointAtCord((location.x + 32 + i),(location.y))||pointAtCord((location.x + 32 + i),(location.y+32))||pointAtCord((location.x + 32 + i),(location.y+62)))){
 					x = false;
 					location.x += (i-1);
 					speedHor = speedHorNorm;
