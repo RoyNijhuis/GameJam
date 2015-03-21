@@ -29,7 +29,7 @@ public class Main extends ApplicationAdapter {
 		batch.begin();
 		field1.render(batch);
 		mario.render(batch);
-		mario.update();
+		mario.update(Gdx.graphics.getDeltaTime());
 		batch.end();
 	}
 }

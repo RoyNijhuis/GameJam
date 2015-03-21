@@ -169,7 +169,7 @@ public class Mario implements MoveableObject{
 		
 	}
 	
-	public void update(){
+	public void update(float delta){
 		physics();
 	}
 

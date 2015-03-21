@@ -74,7 +74,7 @@ public class Field implements Drawable, Updateable{
 	}
 
 	@Override
-	public void update() {
+	public void update(float delta) {
 		
 	}
 }

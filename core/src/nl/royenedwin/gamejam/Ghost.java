@@ -24,7 +24,7 @@ public class Ghost implements MoveableObject{
 	}
 
 	@Override
-	public void update() {
+	public void update(float delta) {
 		
 	}
 }
