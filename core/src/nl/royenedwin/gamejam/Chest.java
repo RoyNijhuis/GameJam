@@ -31,7 +31,7 @@ public class Chest implements StaticObject, Collidable {
 	}
 
 	public void isTouched(Object o) {
-		
+		System.out.println("IS TOUCHED CHEST");
 	}
 
 	@Override
