@@ -16,7 +16,7 @@ public class Main extends ApplicationAdapter {
 	private Sprite background;
 	private Field field1;
 	public static Vector2 SCALING_FACTOR;
-	private Mario mario;
+	private static Mario mario;
 	private static ArrayList<Object> objects;
 	
 	@Override
@@ -31,6 +31,10 @@ public class Main extends ApplicationAdapter {
 		background = new Sprite(new Texture(BACKGROUND_PATH));
 		Gdx.input.setInputProcessor(new InputProcessor(mario));
 		objects.add(new Ghost(new Vector2(0,0), mario));
+	}
+	
+	public static Mario getMario() {
+		return mario;
 	}
 
 	@Override

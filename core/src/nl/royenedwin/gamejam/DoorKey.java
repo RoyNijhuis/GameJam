@@ -31,4 +31,8 @@ public class DoorKey implements ChestItem {
 			break;
 		}
 	}
+	
+	public int getID() {
+		return id;
+	}
 }
