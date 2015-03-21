@@ -67,7 +67,7 @@ public class Field implements Drawable, Updateable{
 	}
 	
 	public boolean fieldIsFull(int x, int y) {
-		return fields[x][33-y] != null && !(fields[x][33-y] instanceof Chest);
+		return fields[x][33-y] != null && !(fields[x][33-y] instanceof Chest) && !(fields[x][33-y] instanceof Full);
 	}
 
 	@Override
