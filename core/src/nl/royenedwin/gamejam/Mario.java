@@ -26,7 +26,7 @@ public class Mario implements MoveableObject{
 		falling = true;
 		sizeX = 2;
 		sizeY = 3;
-		location = new Vector2(32,32);
+		location = new Vector2(32,500);
 	}
 	
 	public void inputUp(){
@@ -107,8 +107,7 @@ public class Mario implements MoveableObject{
 
 	@Override
 	public void render(SpriteBatch batch) {
-		batch.draw(sprite, location.x, location.y);
-		
+		batch.draw(sprite, location.x*Main.SCALING_FACTOR.x, location.y*Main.SCALING_FACTOR.y, 4*sprite.getWidth()*Main.SCALING_FACTOR.x, 3*sprite.getHeight()*Main.SCALING_FACTOR.y);
 	}
 	
 }
