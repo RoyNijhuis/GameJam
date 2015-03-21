@@ -40,9 +40,11 @@ public class Mario implements MoveableObject{
 	private float vertMult;
 	private boolean lastFacedDirectionIsLeft;
 	private Vector2 locationBlock;
+	private ArrayList<ChestItem> chestItems;
 	
 	public Mario(Field field){
 		lives = 3;
+		chestItems = new ArrayList<ChestItem>();
 		this.field = field;
 		walkedPixels = 0;
 		current_animation = 0;
@@ -63,6 +65,10 @@ public class Mario implements MoveableObject{
 		location = new Vector2(100,500);
 		lastFacedDirectionIsLeft = false;
 		locationBlock = new Vector2((int)location.x/32, (int)location.y/32);
+	}
+	
+	public void addChestItem(ChestItem item) {
+		chestItems.add(item);
 	}
 	
 	public void inputUp(){

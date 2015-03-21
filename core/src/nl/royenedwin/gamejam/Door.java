@@ -7,15 +7,37 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Door implements StaticObject, Collidable{
 
-	public static final String TEXTURE_PATH_CLOSED = "door1_closed.png";
+	public static final String TEXTURE_PATH_CLOSED1 = "door1_closed.png";
+	public static final String TEXTURE_PATH_CLOSED2 = "door2_closed.png";
+	public static final String TEXTURE_PATH_CLOSED3 = "door3_closed.png";
+	public static final String TEXTURE_PATH_CLOSED4 = "door4_closed.png";
 	public static final String TEXTURE_PATH_OPEN = "door_open.png";
-	private static Sprite closedSprite = new Sprite(new Texture(TEXTURE_PATH_CLOSED));
+	private Sprite closedSprite;
 	private static Sprite openSprite = new Sprite(new Texture(TEXTURE_PATH_OPEN));
 	private Vector2 position;
 	private boolean isOpen;
+	private DoorKey key;
 	
-	public Door() {
+	public Door(DoorKey key) {
 		isOpen = false;
+		this.key = key;
+		switch(key.getID()) {
+		case 1:
+			closedSprite = new Sprite(new Texture(TEXTURE_PATH_CLOSED1));
+			break;
+		case 2:
+			closedSprite = new Sprite(new Texture(TEXTURE_PATH_CLOSED2));
+			break;
+		case 3:
+			closedSprite = new Sprite(new Texture(TEXTURE_PATH_CLOSED3));
+			break;
+		case 4:
+			closedSprite = new Sprite(new Texture(TEXTURE_PATH_CLOSED4));
+			break;
+		default: 
+			System.out.println("ERROR ERROR ERROR");
+			break;
+		}
 	}
 	
 	public void setPosition(Vector2 position) {

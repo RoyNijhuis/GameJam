@@ -2,6 +2,7 @@ package nl.royenedwin.gamejam;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.PixmapIO;
 import com.badlogic.gdx.graphics.Texture;
@@ -21,19 +22,58 @@ public class Field implements Drawable, Updateable{
 		Pixmap tmp = level1.getTextureData().consumePixmap();
 		for(int x=0;x<60;x++) {
 			for(int y=0;y<34;y++) {
-				//System.out.println("x=" + y + " y=" + x + " color=" + tmp.getPixel(x, y));
-				//fields[33-y][x];
+				Color color = new Color(tmp.getPixel(x, y));
+				System.out.println("x=" + y + " y=" + x + " color=" + color.r + " " + color.g + " " + color.b);
 				if(tmp.getPixel(x, y) == 255) {
 					fields[x][y] = new Block();
-				} else if(tmp.getPixel(x, y) == -16776961) {
-					fields[x][y] = new Chest();
-					fields[x+1][y] = new FullWalk();
-					collidingObjects.add((Collidable)fields[x][y]);
-				} else if(tmp.getPixel(x, y) == 117375231) {
-					fields[x][y] = new Door();
-					collidingObjects.add((Collidable)fields[x][y]);
+				} else if(color.r==0.011764706f && color.g==0.5529412f && color.b == 0f) {
+					//Dark green => deur 1
+					fields[x][y] = new Door(new DoorKey(1));
+					collidingObjects.add((Collidable) fields[x][y]);
 					fields[x][y-1] = new FullNotWalk();
-				} else {
+				} else if(color.r==0.023529412f && color.g==1f && color.b == 0f) {
+					//Light green => chest 1
+					fields[x][y] = new Chest(new DoorKey(1));
+					collidingObjects.add((Collidable) fields[x][y]);
+					fields[x+1][y] = new FullWalk();
+				} else if(color.r==0.654902f && color.g==0f && color.b == 0f) {
+					//Dark red => deur 2
+					fields[x][y] = new Door(new DoorKey(2));
+					collidingObjects.add((Collidable) fields[x][y]);
+					fields[x][y-1] = new FullNotWalk();
+					
+				} else if(color.r==1f && color.g==0f && color.b == 0f) {
+					//Light red => chest 2
+					fields[x][y] = new Chest(new DoorKey(2));
+					collidingObjects.add((Collidable) fields[x][y]);
+					fields[x+1][y] = new FullWalk();
+					
+				} else if(color.r==0f && color.g==0.21176471f && color.b == 1f) {
+					//Light blue => chest 3
+					fields[x][y] = new Chest(new DoorKey(3));
+					collidingObjects.add((Collidable) fields[x][y]);
+					fields[x+1][y] = new FullWalk();
+					
+				} else if(color.r==0f && color.g==0.09019608f && color.b == 0.41960785f) {
+					//Dark blue => deur 3
+					fields[x][y] = new Door(new DoorKey(3));
+					collidingObjects.add((Collidable) fields[x][y]);
+					fields[x][y-1] = new FullNotWalk();
+					
+				} else if(color.r==0.9411765f && color.g==1f && color.b == 0f) {
+					//Light yellow => chest 4
+					fields[x][y] = new Chest(new DoorKey(4));
+					collidingObjects.add((Collidable) fields[x][y]);
+					fields[x+1][y] = new FullWalk();
+					
+				} else if(color.r==0.49803922f && color.g==0.5294118f && color.b == 0f) {
+					//Dark yellow => deur 4
+					fields[x][y] = new Door(new DoorKey(4));
+					collidingObjects.add((Collidable) fields[x][y]);
+					fields[x][y-1] = new FullNotWalk();
+					
+				}
+				else {
 					if(!(fields[x][y] instanceof FullWalk) && !(fields[x][y] instanceof FullNotWalk)) {
 						fields[x][y] = null;
 					}

@@ -12,9 +12,11 @@ public class Chest implements StaticObject, Collidable {
 	private static Sprite openSprite = new Sprite(new Texture(TEXTURE_PATH_OPEN));
 	private Vector2 position;
 	private boolean isOpen;
+	private ChestItem item;
 	
-	public Chest() {
+	public Chest(ChestItem item) {
 		isOpen = false;
+		this.item = item;
 	}
 	
 	public void setPosition(Vector2 position) {
@@ -33,6 +35,7 @@ public class Chest implements StaticObject, Collidable {
 	public void isTouched(Object o) {
 		if(o instanceof Mario) {
 			isOpen = true;
+			Main.getMario().addChestItem(item);
 		}
 	}
 
