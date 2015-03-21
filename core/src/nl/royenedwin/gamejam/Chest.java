@@ -31,12 +31,18 @@ public class Chest implements StaticObject, Collidable {
 	}
 
 	public void isTouched(Object o) {
-		System.out.println("IS TOUCHED CHEST");
+		if(o instanceof Mario) {
+			isOpen = true;
+		}
 	}
 
 	@Override
 	public Vector2 getPostition() {
 		// TODO Auto-generated method stub
 		return position;
+	}
+	
+	public boolean isOpen() {
+		return isOpen;
 	}
 }

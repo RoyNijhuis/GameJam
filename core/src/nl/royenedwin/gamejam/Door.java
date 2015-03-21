@@ -32,7 +32,23 @@ public class Door implements StaticObject, Collidable{
 	}
 
 	public void isTouched(Object o) {
-		System.out.println("IS TOUCHED DOOR");
+		if(o instanceof Mario) {
+			if(!isOpen) {
+				isOpen = true;
+				StaticObject[][] fields = Field.getFields();
+				for(int x=0;x<60;x++) {
+					for(int y=0;y<34;y++) {
+						if(fields[x][y] != null && fields[x][y].equals(this)) {
+							fields[x][y-1] = new FullWalk();
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	public boolean isOpen() {
+		return isOpen;
 	}
 
 	@Override

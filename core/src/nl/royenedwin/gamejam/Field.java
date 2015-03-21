@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Field implements Drawable, Updateable{
 
-	private StaticObject[][] fields;
+	private static StaticObject[][] fields;
 	private ArrayList<Collidable> collidingObjects;
 	
 	public Field() {
@@ -59,7 +59,7 @@ public class Field implements Drawable, Updateable{
 		return null;
 	}
 	
-	public StaticObject[][] getFields() {
+	public static StaticObject[][] getFields() {
 		return fields;
 	}
 	
@@ -80,7 +80,23 @@ public class Field implements Drawable, Updateable{
 	}
 	
 	public boolean fieldIsFull(int x, int y) {
-		return fields[x][33-y] != null && !(fields[x][33-y] instanceof Chest) && !(fields[x][33-y] instanceof FullWalk);
+		
+		boolean result = false;
+		StaticObject o = fields[x][33-y];
+		
+		if(o != null) {
+			if(o instanceof Door && !((Door)o).isOpen()) {
+				result = true;
+			}
+			if(o instanceof FullNotWalk) {
+				result = true;
+			}
+			if(o instanceof Block) {
+				result = true;
+			}
+		}
+		
+		return result;
 	}
 
 	@Override
