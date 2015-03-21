@@ -271,6 +271,10 @@ public class Mario implements MoveableObject{
 			batch.draw(sprite, location.x*Main.SCALING_FACTOR.x, location.y*Main.SCALING_FACTOR.y, sprite.getWidth()*Main.SCALING_FACTOR.x, sprite.getHeight()*Main.SCALING_FACTOR.y);
 		}
 	}
+	
+	public Vector2 getPositionPixels() {
+		return location;
+	}
 
 	@Override
 	public Vector2 getPosition() {
