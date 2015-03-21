@@ -23,12 +23,12 @@ public class Field implements Drawable, Updateable{
 					fields[x][y] = new Block();
 				} else if(tmp.getPixel(x, y) == -16776961) {
 					fields[x][y] = new Chest();
-					fields[x+1][y] = new Full();
+					fields[x+1][y] = new FullWalk();
 				} else if(tmp.getPixel(x, y) == 117375231) {
 					fields[x][y] = new Door();
-					fields[x][y+1] = new Full();
+					fields[x][y-1] = new FullNotWalk();
 				} else {
-					if(!(fields[x][y] instanceof Full)) {
+					if(!(fields[x][y] instanceof FullWalk) && !(fields[x][y] instanceof FullNotWalk)) {
 						fields[x][y] = null;
 					}
 				}
@@ -70,7 +70,7 @@ public class Field implements Drawable, Updateable{
 	}
 	
 	public boolean fieldIsFull(int x, int y) {
-		return fields[x][33-y] != null && !(fields[x][33-y] instanceof Chest) && !(fields[x][33-y] instanceof Full);
+		return fields[x][33-y] != null && !(fields[x][33-y] instanceof Chest) && !(fields[x][33-y] instanceof FullWalk);
 	}
 
 	@Override
