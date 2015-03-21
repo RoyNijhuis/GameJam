@@ -12,6 +12,7 @@ public class Mario implements MoveableObject{
 	private boolean movingLeft;
 	private boolean movingRight;
 	private boolean jump;
+	private Vector2 jumpStartLocation;
 	private boolean falling;
 	private Field field;
 	public static final String TEXTURE_PATH = "mario.png";//TODO change
@@ -24,10 +25,33 @@ public class Mario implements MoveableObject{
 		location = new Vector2(0,0);
 	}
 	
+	public void inputUp(){
+		if(!falling && !jump){
+			jump = true;
+		}
+	}
+	
+	public void inputLeft(){
+		movingLeft = true;
+	}
+	
+	public void inputRight(){
+		movingLeft = true;
+	}
+	
+	public void inputNoLeft(){
+		movingLeft = false;
+	}
+	
+	public void inputNoRight(){
+		movingRight = false;
+	}
+	
 	private void physics(){
 		if(jump){
 			if(!field.fieldIsFull((int)(location.x/32), (int)(location.y/32) + sizeY+1)
-					&& !field.fieldIsFull((int)(location.x/32)+1, (int)(location.y/32) + sizeY+1)){//TODO check field up
+					&& !field.fieldIsFull((int)(location.x/32)+1, (int)(location.y/32) + sizeY+1)
+					&& jumpStartLocation.y < location.y+96){//TODO check field up
 				location.y++;
 			} else {
 				jump = false;
@@ -49,9 +73,9 @@ public class Mario implements MoveableObject{
 					&& !field.fieldIsFull((int)(location.x/32)-1, (int)(location.y/32) +1)
 					&& !field.fieldIsFull((int)(location.x/32)-1, (int)(location.y/32) +2)){//TODO check field up
 				location.x--;
-			} else{
+			} /*else{
 				movingLeft = false;
-			}
+			}*/
 		}
 		
 		if(movingRight && !movingLeft){
@@ -59,9 +83,9 @@ public class Mario implements MoveableObject{
 					&& !field.fieldIsFull((int)(location.x/32) + sizeX +1, (int)(location.y/32) +1)
 					&& !field.fieldIsFull((int)(location.x/32) + sizeX +1, (int)(location.y/32) +2)){//TODO check field up
 				location.x++;
-			} else{
+			} /*else{
 				movingRight = false;
-			}
+			}*/
 		}
 		
 		if(!jump && !falling){
