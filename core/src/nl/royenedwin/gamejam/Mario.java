@@ -104,7 +104,8 @@ public class Mario implements MoveableObject{
 			
 		}
 		if(falling){
-			if(!field.fieldIsFull((int)(location.x/32), (int)(location.y/32) -1)) {
+			if(!field.fieldIsFull((int)(location.x/32), (int)(location.y/32) -1)&&
+					!field.fieldIsFull((int)((location.x+31)/32), (int)(location.y/32) + sizeY+1)) {
 				location.y-=speedVer;
 				if(speedVer<=7){
 					speedVer+=0.2;
