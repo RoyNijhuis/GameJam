@@ -8,15 +8,17 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 public class Main extends ApplicationAdapter {
-	SpriteBatch batch;
-	Field field1;
+	private SpriteBatch batch;
+	private Field field1;
 	public static Vector2 SCALING_FACTOR;
+	private Mario mario;
 	
 	@Override
 	public void create () {
 		SCALING_FACTOR = new Vector2(Gdx.graphics.getWidth()/1920f, Gdx.graphics.getHeight()/1088f);
 		batch = new SpriteBatch();
 		field1 = new Field();
+		mario = new Mario(field1);
 	}
 
 	@Override
@@ -25,6 +27,8 @@ public class Main extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		field1.render(batch);
+		mario.render(batch);
+		mario.update();
 		batch.end();
 	}
 }
