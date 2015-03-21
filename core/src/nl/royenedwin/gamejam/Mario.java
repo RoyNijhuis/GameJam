@@ -65,6 +65,14 @@ public class Mario implements MoveableObject{
 		movingRight = false;
 	}
 	
+	public void shoot() {
+		if(movingLeft) {
+			Main.createStone(new Vector2(location.x+sprite.getWidth()/2, location.y+sprite.getHeight()/2), new Vector2(-10,5));
+		} else if(movingRight){
+			Main.createStone(new Vector2(location.x+sprite.getWidth()/2, location.y+sprite.getHeight()/2), new Vector2(10,5));
+		}
+	}
+	
 	private void physics(){
 		if(jump){
 			if((!field.fieldIsFull((int)(location.x/32), (int)(location.y/32) + sizeY+1) &&

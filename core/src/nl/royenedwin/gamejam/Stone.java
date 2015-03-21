@@ -5,13 +5,16 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
-public class Ghost implements MoveableObject{
-	public static final String TEXTURE_PATH = "mario_ghost.png";
+public class Stone implements MoveableObject{
+
+	public static final String TEXTURE_PATH = "cobblestone.png";
 	private static Sprite sprite = new Sprite(new Texture(TEXTURE_PATH));
 	private Vector2 position;
+	private Vector2 velocity;
 	
-	public Ghost(Vector2 position) {
+	public Stone(Vector2 position, Vector2 velocity) {
 		this.position = position;
+		this.velocity = velocity;
 	}
 	
 	@Override
@@ -21,6 +24,8 @@ public class Ghost implements MoveableObject{
 
 	@Override
 	public void update(float delta) {
-		
+		velocity.y-=delta*15;
+		position.x+=velocity.x;
+		position.y+=velocity.y;
 	}
 }

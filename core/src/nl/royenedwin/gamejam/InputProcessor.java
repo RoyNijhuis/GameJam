@@ -2,6 +2,7 @@ package nl.royenedwin.gamejam;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.math.Vector2;
 
 public class InputProcessor extends InputAdapter {
 	
@@ -18,6 +19,8 @@ public class InputProcessor extends InputAdapter {
 			mario.inputRight();
 		} else if(keycode == Keys.W || keycode == Keys.UP) {
 			mario.inputUp();
+		} else if(keycode == Keys.SPACE) {
+			mario.shoot();
 		}
 		System.out.println("key down");
 		return true;
