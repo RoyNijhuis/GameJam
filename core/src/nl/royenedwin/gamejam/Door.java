@@ -47,9 +47,9 @@ public class Door implements StaticObject, Collidable{
 	@Override
 	public void render(SpriteBatch batch) {
 		if(isOpen) {
-			batch.draw(openSprite, position.x*Main.SCALING_FACTOR.x, position.y*Main.SCALING_FACTOR.y, closedSprite.getWidth()*Main.SCALING_FACTOR.x, closedSprite.getHeight()*Main.SCALING_FACTOR.y);
+			batch.draw(openSprite, position.x*Game.SCALING_FACTOR.x, position.y*Game.SCALING_FACTOR.y, closedSprite.getWidth()*Game.SCALING_FACTOR.x, closedSprite.getHeight()*Game.SCALING_FACTOR.y);
 		} else {
-			batch.draw(closedSprite, position.x*Main.SCALING_FACTOR.x, position.y*Main.SCALING_FACTOR.y, closedSprite.getWidth()*Main.SCALING_FACTOR.x, closedSprite.getHeight()*Main.SCALING_FACTOR.y);
+			batch.draw(closedSprite, position.x*Game.SCALING_FACTOR.x, position.y*Game.SCALING_FACTOR.y, closedSprite.getWidth()*Game.SCALING_FACTOR.x, closedSprite.getHeight()*Game.SCALING_FACTOR.y);
 		}
 	}
 

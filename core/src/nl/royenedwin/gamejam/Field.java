@@ -23,7 +23,6 @@ public class Field implements Drawable, Updateable{
 		for(int x=0;x<60;x++) {
 			for(int y=0;y<34;y++) {
 				Color color = new Color(tmp.getPixel(x, y));
-				System.out.println("x=" + y + " y=" + x + " color=" + color.r + " " + color.g + " " + color.b);
 				if(tmp.getPixel(x, y) == 255) {
 					fields[x][y] = new Block();
 				} else if(color.r==0.011764706f && color.g==0.5529412f && color.b == 0f) {

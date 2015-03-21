@@ -19,7 +19,7 @@ public class Stone implements MoveableObject{
 	
 	@Override
 	public void render(SpriteBatch batch) {
-		batch.draw(sprite, position.x*Main.SCALING_FACTOR.x, position.y*Main.SCALING_FACTOR.y, sprite.getWidth()*Main.SCALING_FACTOR.x, sprite.getHeight()*Main.SCALING_FACTOR.y);
+		batch.draw(sprite, position.x*Game.SCALING_FACTOR.x, position.y*Game.SCALING_FACTOR.y, sprite.getWidth()*Game.SCALING_FACTOR.x, sprite.getHeight()*Game.SCALING_FACTOR.y);
 	}
 
 	@Override
@@ -28,23 +28,23 @@ public class Stone implements MoveableObject{
 		position.x+=velocity.x;
 		position.y+=velocity.y;
 		if(Field.fieldIsFull2((int)(position.x/32), (int)(position.y)/32)){
-			Main.removeObject(this);
+			Game.removeObject(this);
 		} else if(position.x <0 || position.x>1920 || position.y<0 || position.y>1080){
-			Main.removeObject(this);
+			Game.removeObject(this);
 		}
-		Ghost ghost = Main.getGhost();
+		Ghost ghost = Game.getGhost();
 		if((int)(position.x/32) == (int)(ghost.getPosition().x/32) && (int)(position.y/32) == (int)(ghost.getPosition().y/32)){
 			ghost.hit();
-			Main.removeObject(this);
+			Game.removeObject(this);
 		} else if((int)(position.x/32) == (int)(ghost.getPosition().x/32)+1 && (int)(position.y/32) == (int)(ghost.getPosition().y/32)){
 			ghost.hit();
-			Main.removeObject(this);
+			Game.removeObject(this);
 		} else if((int)(position.x/32) == (int)(ghost.getPosition().x/32) && (int)(position.y/32) == (int)(ghost.getPosition().y/32)+1){
 			ghost.hit();
-			Main.removeObject(this);
+			Game.removeObject(this);
 		} else if((int)(position.x/32) == (int)(ghost.getPosition().x/32)+1 && (int)(position.y/32) == (int)(ghost.getPosition().y/32)+1){
 			ghost.hit();
-			Main.removeObject(this);
+			Game.removeObject(this);
 		}
 	}
 

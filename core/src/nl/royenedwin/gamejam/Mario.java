@@ -129,9 +129,9 @@ public class Mario implements MoveableObject{
 	
 	public void shoot() {
 		if(lastFacedDirectionIsLeft) {
-			Main.createStone(new Vector2(location.x+sprite.getWidth()/2, location.y+sprite.getHeight()/2), new Vector2(-10,5));
+			Game.createStone(new Vector2(location.x+sprite.getWidth()/2, location.y+sprite.getHeight()/2), new Vector2(-10,5));
 		} else {
-			Main.createStone(new Vector2(location.x+sprite.getWidth()/2, location.y+sprite.getHeight()/2), new Vector2(10,5));
+			Game.createStone(new Vector2(location.x+sprite.getWidth()/2, location.y+sprite.getHeight()/2), new Vector2(10,5));
 		}
 	}
 	
@@ -299,25 +299,28 @@ public class Mario implements MoveableObject{
 	
 	public void takeLive(){
 		lives--;
+		if(lives==0) {
+			Game.kill();
+		}
 	}
 	@Override
 	public void render(SpriteBatch batch) {
 		for(int i = 0; i<lives; i++){
-			batch.draw(heart, 10 + 74*i, 10, heart.getWidth()*Main.SCALING_FACTOR.x, heart.getHeight()*Main.SCALING_FACTOR.y);
+			batch.draw(heart, 10 + 74*i, 10, heart.getWidth()*Game.SCALING_FACTOR.x, heart.getHeight()*Game.SCALING_FACTOR.y);
 		}
 		int c = 0;
 		for(ChestItem z: chestItems){
 			c++;
-			batch.draw(z.getSprite(), 1900*Main.SCALING_FACTOR.x - 74*c*Main.SCALING_FACTOR.x, 10, z.getSprite().getWidth()*Main.SCALING_FACTOR.x, z.getSprite().getHeight()*Main.SCALING_FACTOR.y);
+			batch.draw(z.getSprite(), 1900*Game.SCALING_FACTOR.x - 74*c*Game.SCALING_FACTOR.x, 10, z.getSprite().getWidth()*Game.SCALING_FACTOR.x, z.getSprite().getHeight()*Game.SCALING_FACTOR.y);
 		}
 
 		if(lastFacedDirectionIsLeft) {
 			if(!sprite.isFlipX()) {
 				sprite.flip(true, false);
 			}
-			batch.draw(sprite, location.x*Main.SCALING_FACTOR.x, location.y*Main.SCALING_FACTOR.y, sprite.getWidth()*Main.SCALING_FACTOR.x, sprite.getHeight()*Main.SCALING_FACTOR.y);
+			batch.draw(sprite, location.x*Game.SCALING_FACTOR.x, location.y*Game.SCALING_FACTOR.y, sprite.getWidth()*Game.SCALING_FACTOR.x, sprite.getHeight()*Game.SCALING_FACTOR.y);
 		} else {
-			batch.draw(sprite, location.x*Main.SCALING_FACTOR.x, location.y*Main.SCALING_FACTOR.y, sprite.getWidth()*Main.SCALING_FACTOR.x, sprite.getHeight()*Main.SCALING_FACTOR.y);
+			batch.draw(sprite, location.x*Game.SCALING_FACTOR.x, location.y*Game.SCALING_FACTOR.y, sprite.getWidth()*Game.SCALING_FACTOR.x, sprite.getHeight()*Game.SCALING_FACTOR.y);
 		}
 	}
 	
