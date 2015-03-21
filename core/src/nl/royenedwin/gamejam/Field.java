@@ -17,7 +17,7 @@ public class Field implements Drawable, Updateable{
 		Pixmap tmp = level1.getTextureData().consumePixmap();
 		for(int x=0;x<60;x++) {
 			for(int y=0;y<34;y++) {
-				System.out.println("x=" + y + " y=" + x + " color=" + tmp.getPixel(x, y));
+				//System.out.println("x=" + y + " y=" + x + " color=" + tmp.getPixel(x, y));
 				//fields[33-y][x];
 				if(tmp.getPixel(x, y) == 255) {
 					fields[x][y] = new Block();
