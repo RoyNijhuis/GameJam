@@ -17,12 +17,12 @@ public class Field implements Drawable, Updateable{
 		Pixmap tmp = level1.getTextureData().consumePixmap();
 		for(int x=0;x<60;x++) {
 			for(int y=0;y<34;y++) {
-				System.out.println("x=" + (33-y) + " y=" + x + " color=" + tmp.getPixel(x, 33-y));
+				System.out.println("x=" + y + " y=" + x + " color=" + tmp.getPixel(x, y));
 				//fields[33-y][x];
-				if(tmp.getPixel(x, 33-y) == 255) {
-					fields[x][33-y] = new Block();
+				if(tmp.getPixel(x, y) == 255) {
+					fields[x][y] = new Block();
 				} else {
-					fields[x][33-y] = null;
+					fields[x][y] = null;
 				}
 			}
 		}
@@ -30,8 +30,8 @@ public class Field implements Drawable, Updateable{
 		//set positions
 		for(int x=0;x<60;x++) {
 			for(int y=0;y<34;y++) {
-				if(fields[x][33-y] != null) {
-					fields[x][33-y].setPosition(new Vector2(x*32,(33-y)*32));
+				if(fields[x][y] != null) {
+					fields[x][y].setPosition(new Vector2(x*32,(33-y)*32));
 				}
 			}
 		}
