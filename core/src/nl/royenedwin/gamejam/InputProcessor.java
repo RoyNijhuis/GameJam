@@ -17,10 +17,11 @@ public class InputProcessor extends InputAdapter {
 			mario.inputLeft();
 		} else if(keycode == Keys.D || keycode == Keys.RIGHT) {
 			mario.inputRight();
-		} else if(keycode == Keys.W || keycode == Keys.UP) {
+		}
+		if(keycode == Keys.W || keycode == Keys.UP) {
 			mario.inputUp();
-		} else if(keycode == Keys.SPACE) {
-			System.out.println("SHOOT BITCH");
+		}
+		if(keycode == Keys.SPACE) {
 			mario.shoot();
 		}
 		System.out.println("key down");
