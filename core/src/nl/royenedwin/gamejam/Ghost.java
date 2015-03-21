@@ -9,6 +9,7 @@ public class Ghost implements MoveableObject{
 	public static final String TEXTURE_PATH = "mario_ghost.png";
 	private static Sprite sprite = new Sprite(new Texture(TEXTURE_PATH));
 	private Vector2 position;
+	private Vector2 velocity;
 	
 	public Ghost(Vector2 position) {
 		this.position = position;

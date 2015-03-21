@@ -30,6 +30,7 @@ public class Main extends ApplicationAdapter {
 		objects.add(mario);
 		background = new Sprite(new Texture(BACKGROUND_PATH));
 		Gdx.input.setInputProcessor(new InputProcessor(mario));
+		objects.add(new Ghost(new Vector2(0,0)));
 	}
 
 	@Override
