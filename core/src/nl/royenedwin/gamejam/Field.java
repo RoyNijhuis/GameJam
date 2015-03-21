@@ -21,8 +21,13 @@ public class Field implements Drawable, Updateable{
 				//fields[33-y][x];
 				if(tmp.getPixel(x, y) == 255) {
 					fields[x][y] = new Block();
+				} else if(tmp.getPixel(x, y) == -16776961) {
+					fields[x][y] = new Chest();
+					fields[x+1][y] = new Full();
 				} else {
-					fields[x][y] = null;
+					if(!(fields[x][y] instanceof Full)) {
+						fields[x][y] = null;
+					}
 				}
 			}
 		}
