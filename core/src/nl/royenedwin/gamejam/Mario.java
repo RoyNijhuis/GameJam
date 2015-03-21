@@ -34,6 +34,7 @@ public class Mario implements MoveableObject{
 	private float horMult;
 	private float vertMult;
 	private boolean lastFacedDirectionIsLeft;
+	private Vector2 locationBlock;
 	
 	public Mario(Field field){
 		this.field = field;
@@ -55,6 +56,7 @@ public class Mario implements MoveableObject{
 		vertMult = 360;
 		location = new Vector2(100,500);
 		lastFacedDirectionIsLeft = false;
+		locationBlock = new Vector2((int)location.x/32, (int)location.y/32);
 	}
 	
 	public void inputUp(){
@@ -115,6 +117,7 @@ public class Mario implements MoveableObject{
 				if((pointAtCord((location.x),(location.y+62+i))||pointAtCord((location.x+31),(location.y+62+i)))){
 					y = false;
 					location.y += (i-1);
+					speedVer -= vertMult*delta;
 					jump = false;
 					falling = true;
 					break;
@@ -136,7 +139,6 @@ public class Mario implements MoveableObject{
 			for(int i = 0; i < movement; i++){
 				if((pointAtCord((location.x),(location.y-i))||pointAtCord((location.x+31),(location.y-i)))){
 					y = false;
-					System.out.println(i);
 					location.y -= (i-1);
 					speedVer = speedVertNorm;
 					falling = false;
@@ -202,102 +204,6 @@ public class Mario implements MoveableObject{
 			}
 		}
 	}
-		/*
-		if(movingRight && !movingLeft){
-			if(!field.fieldIsFull((int)((location.x-31)/32) + sizeX+ 1, (int)(location.y/32))
-					&& !field.fieldIsFull((int)((location.x-31)/32) + sizeX +1, (int)(location.y/32) +1)){//TODO check field up
-				location.x+=speedHor;
-				if(speedHor<=7){
-					speedHor += 0.2;
-				}
-			} else{
-				speedHor = 1;
-			}
-		}
-	}
-	
-	private void physics(){
-		if(jump){
-			if((!field.fieldIsFull((int)(location.x/32), (int)(location.y/32) + sizeY+1) &&
-					!field.fieldIsFull((int)((location.x+31)/32), (int)(location.y/32) + sizeY+1)
-					&& jumpStartLocation.y < location.y+96)){//TODO check field up
-				location.y += speedVer*delta;
-				speedVer -=0.2*delta;
-				if(speedVer < 0){
-					jump = false;
-					falling = true;
-				}
-			}  else {
-				if((int)(location.y%32) < 25){
-					location.y+=speedVer*delta;
-					if(speedVer<=7){
-						speedVer+=0.2*delta;
-					}
-				} else if((int)(location.y%32) == 31 && speedVer<32-location.y%32){
-					location.y+=speedVer*delta;
-				} else if((int)(location.y%32) == 30 && speedVer<32-location.y%32){
-					location.y+=speedVer*delta;
-				} else if((int)(location.y%32) == 29 && speedVer<32-location.y%32){
-					location.y+=speedVer*delta;
-				} else if((int)(location.y%32) == 28 && speedVer<32-location.y%32){
-					location.y+=speedVer*delta;
-				} else if((int)(location.y%32) == 27 && speedVer<32-location.y%32){
-					location.y+=speedVer*delta;
-				} else if((int)(location.y%32) == 26 && speedVer<32-location.y%32){
-					location.y+=speedVer*delta;
-				} else {
-					location.y+=32-location.y%32;
-					jump = false;
-					falling = true;
-					speedVer = 1;
-				}
-			}
-			
-		}
-		if(falling){
-			if(!field.fieldIsFull((int)(location.x/32), (int)(location.y/32) -1)&&
-					!field.fieldIsFull((int)((location.x+31)/32), (int)(location.y/32) -1)) {
-				location.y-=speedVer;
-				if(speedVer<=7){
-					speedVer+=0.2;
-				}
-			} else {
-				if((int)(location.y%32) > 7){
-					location.y-=speedVer;
-					if(speedVer<=7){
-						speedVer+=0.2;
-					}
-				} else if((int)(location.y%32) == 2 && speedVer<location.y%32){
-					location.y-=speedVer;
-				} else if((int)(location.y%32) == 3 && speedVer<location.y%32){
-					location.y-=speedVer;
-				} else if((int)(location.y%32) == 4 && speedVer<location.y%32){
-					location.y-=speedVer;
-				} else if((int)(location.y%32) == 5 && speedVer<location.y%32){
-					location.y-=speedVer;
-				} else if((int)(location.y%32) == 6 && speedVer<location.y%32){
-					location.y-=speedVer;
-				} else if((int)(location.y%32) == 7 && speedVer<location.y%32){
-					location.y-=speedVer;
-				}else {
-					location.y-=location.y%32;
-					falling = false;
-					speedVer = 1;
-				}
-			}
-		}
-		
-		if(movingLeft && !movingRight){
-			if(!field.fieldIsFull((int)((location.x-31)/32)+1, (int)(location.y/32))
-					&& !field.fieldIsFull((int)((location.x-31)/32)+1, (int)(location.y/32) +1)){//TODO check field up
-				location.x-=speedHor;
-				if(speedHor<=7){
-					speedHor += 0.2;
-				}
-			} else{
-				speedHor = 1;
-			}
-		}*/
 	
 	public void update(float delta){
 		physics(delta);
@@ -332,6 +238,11 @@ public class Mario implements MoveableObject{
 				}
 				walkedPixels = 0;
 			}
+		}
+		Vector2 temp = new Vector2((int)location.x/32, (int)location.y/32);
+		if(!temp.equals(locationBlock)){
+			//TODO check collision
+			
 		}
 	}
 
