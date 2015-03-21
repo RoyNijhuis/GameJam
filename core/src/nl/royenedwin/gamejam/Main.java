@@ -17,12 +17,15 @@ public class Main extends ApplicationAdapter {
 	private Field field1;
 	public static Vector2 SCALING_FACTOR;
 	private Mario mario;
+	private static Ghost ghost;
 	private static ArrayList<Object> objects;
+	private static ArrayList<Object> remove;
 	
 	@Override
 	public void create () {
 		SCALING_FACTOR = new Vector2(Gdx.graphics.getWidth()/1920f, Gdx.graphics.getHeight()/1088f);
 		objects = new ArrayList<Object>();
+		remove = new ArrayList<Object>();
 		batch = new SpriteBatch();
 		field1 = new Field();
 		objects.add(field1);
@@ -30,7 +33,7 @@ public class Main extends ApplicationAdapter {
 		objects.add(mario);
 		background = new Sprite(new Texture(BACKGROUND_PATH));
 		Gdx.input.setInputProcessor(new InputProcessor(mario));
-		objects.add(new Ghost(new Vector2(0,0), mario));
+		objects.add(ghost = new Ghost(new Vector2(0,0), mario));
 	}
 
 	@Override
@@ -48,7 +51,15 @@ public class Main extends ApplicationAdapter {
 				((Drawable) o).render(batch);
 			}
 		}
+		for(Object o: remove){
+			objects.remove(o);
+		}
+		remove.clear();
 		batch.end();
+	}
+	
+	public static Ghost getGhost(){
+		return ghost;
 	}
 	
 	public static void createStone(Vector2 position, Vector2 velocity) {
@@ -57,5 +68,9 @@ public class Main extends ApplicationAdapter {
 	
 	public static ArrayList<Object> getObjects() {
 		return objects;
+	}
+	
+	public static void removeObject(Object o){
+		remove.add(o);
 	}
 }

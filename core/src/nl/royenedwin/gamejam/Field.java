@@ -98,6 +98,26 @@ public class Field implements Drawable, Updateable{
 		
 		return result;
 	}
+	
+	public static boolean fieldIsFull2(int x, int y) {
+		
+		boolean result = false;
+		StaticObject o = fields[x][33-y];
+		
+		if(o != null) {
+			if(o instanceof Door && !((Door)o).isOpen()) {
+				result = true;
+			}
+			if(o instanceof FullNotWalk) {
+				result = true;
+			}
+			if(o instanceof Block) {
+				result = true;
+			}
+		}
+		
+		return result;
+	}
 
 	@Override
 	public void update(float delta) {
