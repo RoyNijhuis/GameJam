@@ -32,7 +32,7 @@ public class Door implements StaticObject, Collidable{
 	}
 
 	public void isTouched(Object o) {
-		
+		System.out.println("IS TOUCHED DOOR");
 	}
 
 	@Override

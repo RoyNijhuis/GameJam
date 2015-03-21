@@ -249,14 +249,26 @@ public class Mario implements MoveableObject{
 		}
 		Vector2 temp = new Vector2((int)location.x/32, (int)location.y/32);
 		if(!temp.equals(locationBlock)){
+			locationBlock = temp;
 			collisionBlocks();
 		}
 	}
 	
 	private void collisionBlocks(){
+		System.out.println("Test collision");
 		ArrayList<Collidable> set = field.getCollidingObjects();
+		
+		Vector2 v2 =new Vector2(location.x+64,location.y);
+		Vector2 v3 =new Vector2(location.x-32,location.y);
 		for(Collidable x: set){
-			((StaticObject)x).getPostition();
+			Vector2 pos = ((StaticObject)x).getPostition();
+			if((int)(location.x/32) == (int)(pos.x/32) && (int)(location.y/32) == (int)(pos.y/32)){
+				x.isTouched(this);
+			} else if((int)(v2.x/32) == (int)(pos.x/32) && (int)(v2.y/32) == (int)(pos.y/32)){
+				x.isTouched(this);
+			} else if((int)(v3.x/32) == (int)(pos.x/32) && (int)(v3.y/32) == (int)(pos.y/32)){
+				x.isTouched(this);
+			}
 		}
 	}
 
