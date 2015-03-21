@@ -27,6 +27,25 @@ public class Stone implements MoveableObject{
 		velocity.y-=delta*15;
 		position.x+=velocity.x;
 		position.y+=velocity.y;
+		if(Field.fieldIsFull2((int)(position.x/32), (int)(position.y)/32)){
+			Main.removeObject(this);
+		} else if(position.x <0 || position.x>1920 || position.y<0 || position.y>1080){
+			Main.removeObject(this);
+		}
+		Ghost ghost = Main.getGhost();
+		if((int)(position.x/32) == (int)(ghost.getPosition().x/32) && (int)(position.y/32) == (int)(ghost.getPosition().y/32)){
+			ghost.hit();
+			Main.removeObject(this);
+		} else if((int)(position.x/32) == (int)(ghost.getPosition().x/32)+1 && (int)(position.y/32) == (int)(ghost.getPosition().y/32)){
+			ghost.hit();
+			Main.removeObject(this);
+		} else if((int)(position.x/32) == (int)(ghost.getPosition().x/32) && (int)(position.y/32) == (int)(ghost.getPosition().y/32)+1){
+			ghost.hit();
+			Main.removeObject(this);
+		} else if((int)(position.x/32) == (int)(ghost.getPosition().x/32)+1 && (int)(position.y/32) == (int)(ghost.getPosition().y/32)+1){
+			ghost.hit();
+			Main.removeObject(this);
+		}
 	}
 
 	@Override
