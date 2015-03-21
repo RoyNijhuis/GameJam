@@ -23,4 +23,10 @@ public class Ghost implements MoveableObject{
 	public void update(float delta) {
 		
 	}
+
+	@Override
+	public Vector2 getPosition() {
+		// TODO Auto-generated method stub
+		return position;
+	}
 }

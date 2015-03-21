@@ -23,4 +23,10 @@ public class Block implements StaticObject {
 	public void render(SpriteBatch batch) {
 		batch.draw(sprite, position.x*Main.SCALING_FACTOR.x, position.y*Main.SCALING_FACTOR.y, sprite.getWidth()*Main.SCALING_FACTOR.x, sprite.getHeight()*Main.SCALING_FACTOR.y);
 	}
+
+	@Override
+	public Vector2 getPostition() {
+		// TODO Auto-generated method stub
+		return position;
+	}
 }

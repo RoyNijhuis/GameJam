@@ -28,4 +28,10 @@ public class Stone implements MoveableObject{
 		position.x+=velocity.x;
 		position.y+=velocity.y;
 	}
+
+	@Override
+	public Vector2 getPosition() {
+		// TODO Auto-generated method stub
+		return position;
+	}
 }

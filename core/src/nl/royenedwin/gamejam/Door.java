@@ -34,4 +34,10 @@ public class Door implements StaticObject, Collidable{
 	public void isTouched(Object o) {
 		
 	}
+
+	@Override
+	public Vector2 getPostition() {
+		// TODO Auto-generated method stub
+		return position;
+	}
 }

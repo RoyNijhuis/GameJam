@@ -1,5 +1,7 @@
 package nl.royenedwin.gamejam;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -252,7 +254,10 @@ public class Mario implements MoveableObject{
 	}
 	
 	private void collisionBlocks(){
-		
+		ArrayList<Collidable> set = field.getCollidingObjects();
+		for(Collidable x: set){
+			((StaticObject)x).getPostition();
+		}
 	}
 
 	@Override
@@ -265,6 +270,11 @@ public class Mario implements MoveableObject{
 		} else {
 			batch.draw(sprite, location.x*Main.SCALING_FACTOR.x, location.y*Main.SCALING_FACTOR.y, sprite.getWidth()*Main.SCALING_FACTOR.x, sprite.getHeight()*Main.SCALING_FACTOR.y);
 		}
+	}
+
+	@Override
+	public Vector2 getPosition() {
+		return new Vector2((int)(location.x/32),(int)(location.y/32));
 	}
 	
 }

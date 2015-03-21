@@ -87,4 +87,10 @@ public class Field implements Drawable, Updateable{
 	public void update(float delta) {
 		
 	}
+
+	@Override
+	public Vector2 getPosition() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
