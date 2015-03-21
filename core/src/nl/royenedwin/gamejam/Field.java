@@ -62,7 +62,7 @@ public class Field implements Drawable, Updateable{
 	}
 	
 	public boolean fieldIsFull(int x, int y) {
-		return fields[x][y] != null;
+		return fields[x][33-y] != null;
 	}
 
 	@Override

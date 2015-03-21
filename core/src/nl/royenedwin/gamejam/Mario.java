@@ -26,7 +26,7 @@ public class Mario implements MoveableObject{
 		falling = true;
 		sizeX = 1;
 		sizeY = 2;
-		location = new Vector2(32,500);
+		location = new Vector2(100,500);
 	}
 	
 	public void inputUp(){
@@ -42,7 +42,7 @@ public class Mario implements MoveableObject{
 	}
 	
 	public void inputRight(){
-		movingLeft = true;
+		movingRight = true;
 	}
 	
 	public void inputNoLeft(){
@@ -55,8 +55,9 @@ public class Mario implements MoveableObject{
 	
 	private void physics(){
 		if(jump){
-			if(!field.fieldIsFull((int)(location.x/32), (int)(location.y/32) + sizeY+1)
-					&& jumpStartLocation.y < location.y+96){//TODO check field up
+			if((!field.fieldIsFull((int)(location.x/32), (int)(location.y/32) + sizeY+1)
+					&& jumpStartLocation.y < location.y+96)
+					|| location.y%32 != 0){//TODO check field up
 				location.y++;
 			} else {
 				jump = false;
