@@ -17,6 +17,8 @@ public class Mario implements MoveableObject{
 	private Field field;
 	public static final String TEXTURE_PATH = "mario.png";//TODO change
 	private static Sprite sprite = new Sprite(new Texture(TEXTURE_PATH));
+	private float speedHor;
+	private float speedVer;
 	
 	public Mario(Field field){
 		this.field = field;
@@ -26,6 +28,8 @@ public class Mario implements MoveableObject{
 		falling = true;
 		sizeX = 1;
 		sizeY = 2;
+		speedHor = 1;
+		speedVer = 1;
 		location = new Vector2(100,500);
 	}
 	
@@ -33,63 +37,125 @@ public class Mario implements MoveableObject{
 		if(!falling && !jump){
 			jumpStartLocation = location;
 			jump = true;
-			
+			speedVer = 7;
 		}
 	}
 	
 	public void inputLeft(){
-		movingLeft = true;
+		if(!movingLeft){
+			speedHor = 1;
+			movingLeft = true;
+		}	
 	}
 	
 	public void inputRight(){
-		movingRight = true;
+		if(!movingRight){
+			speedHor = 1;
+			movingRight = true;
+		}		
 	}
 	
 	public void inputNoLeft(){
+		speedHor = 1;
 		movingLeft = false;
 	}
 	
 	public void inputNoRight(){
+		speedHor = 1;
 		movingRight = false;
 	}
 	
 	private void physics(){
 		if(jump){
 			if((!field.fieldIsFull((int)(location.x/32), (int)(location.y/32) + sizeY+1)
-					&& jumpStartLocation.y < location.y+96)
-					|| location.y%32 != 0){//TODO check field up
-				location.y++;
-			} else {
-				jump = false;
-				falling = true;
+					&& jumpStartLocation.y < location.y+96)){//TODO check field up
+				location.y += speedVer;
+				speedVer -=0.2;
+				if(speedVer < 0){
+					jump = false;
+					falling = true;
+				}
+			}  else {
+				if((int)(location.y%32) > 7){
+					location.y+=speedVer;
+					if(speedVer<=7){
+						speedVer+=0.2;
+					}
+				} else if((int)(location.y%32) == 2 && speedVer<location.y%32){
+					location.y+=speedVer;
+				} else if((int)(location.y%32) == 3 && speedVer<location.y%32){
+					location.y+=speedVer;
+				} else if((int)(location.y%32) == 4 && speedVer<location.y%32){
+					location.y+=speedVer;
+				} else if((int)(location.y%32) == 5 && speedVer<location.y%32){
+					location.y+=speedVer;
+				} else if((int)(location.y%32) == 6 && speedVer<location.y%32){
+					location.y+=speedVer;
+				} else if((int)(location.y%32) == 7 && speedVer<location.y%32){
+					location.y+=speedVer;
+				}else {
+					location.y+=location.y%32;
+					jump = false;
+					falling = true;
+					speedVer = 1;
+				}
 			}
 			
 		}
 		if(falling){
-			if(!field.fieldIsFull((int)(location.x/32), (int)(location.y/32) -1)
-					|| location.y%32 != 0){
-				location.y--;
+			if(!field.fieldIsFull((int)(location.x/32), (int)(location.y/32) -1)) {
+				location.y-=speedVer;
+				if(speedVer<=7){
+					speedVer+=0.2;
+				}
 			} else {
-				falling = false;
+				if((int)(location.y%32) > 7){
+					location.y-=speedVer;
+					if(speedVer<=7){
+						speedVer+=0.2;
+					}
+				} else if((int)(location.y%32) == 2 && speedVer<location.y%32){
+					location.y-=speedVer;
+				} else if((int)(location.y%32) == 3 && speedVer<location.y%32){
+					location.y-=speedVer;
+				} else if((int)(location.y%32) == 4 && speedVer<location.y%32){
+					location.y-=speedVer;
+				} else if((int)(location.y%32) == 5 && speedVer<location.y%32){
+					location.y-=speedVer;
+				} else if((int)(location.y%32) == 6 && speedVer<location.y%32){
+					location.y-=speedVer;
+				} else if((int)(location.y%32) == 7 && speedVer<location.y%32){
+					location.y-=speedVer;
+				}else {
+					location.y-=location.y%32;
+					falling = false;
+					speedVer = 1;
+				}
 			}
 		}
 		
 		if(movingLeft && !movingRight){
 			if(!field.fieldIsFull((int)(location.x/32) - 1, (int)(location.y/32))
 					&& !field.fieldIsFull((int)(location.x/32)-1, (int)(location.y/32) +1)){//TODO check field up
-				location.x--;
-			} /*else{
-				movingLeft = false;
-			}*/
+				location.x-=speedHor;
+				if(speedHor<=7){
+					speedHor += 0.2;
+				}
+			} else{
+				speedHor = 1;
+			}
 		}
 		
 		if(movingRight && !movingLeft){
 			if(!field.fieldIsFull((int)(location.x/32) + sizeX+ 1, (int)(location.y/32))
 					&& !field.fieldIsFull((int)(location.x/32) + sizeX +1, (int)(location.y/32) +1)){//TODO check field up
-				location.x++;
-			} /*else{
-				movingRight = false;
-			}*/
+				location.x+=speedHor;
+				if(speedHor<=7){
+					speedHor += 0.2;
+				}
+			} else{
+				speedHor = 1;
+			}
 		}
 		
 		if(!jump && !falling){
