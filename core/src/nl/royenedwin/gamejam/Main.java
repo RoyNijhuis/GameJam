@@ -53,4 +53,8 @@ public class Main extends ApplicationAdapter {
 	public static void createStone(Vector2 position, Vector2 velocity) {
 		objects.add(new Stone(position, velocity));
 	}
+	
+	public static ArrayList<Object> getObjects() {
+		return objects;
+	}
 }
