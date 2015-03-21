@@ -39,9 +39,9 @@ public class Mario implements MoveableObject{
 		maxSpeedHor = 500;
 		maxSpeedVer = 500;
 		speedHorNorm = 200;
-		speedVertNorm = 200;
+		speedVertNorm = 300;
 		horMult = 100;
-		vertMult = 100;
+		vertMult = 400;
 		location = new Vector2(100,500);
 	}
 	
@@ -81,6 +81,14 @@ public class Mario implements MoveableObject{
 		return field.fieldIsFull((int)(x/32),(int)(y/32));
 	}
 	
+	public void shoot() {
+		if(movingLeft) {
+			Main.createStone(new Vector2(location.x+sprite.getWidth()/2, location.y+sprite.getHeight()/2), new Vector2(-10,5));
+		} else if(movingRight){
+			Main.createStone(new Vector2(location.x+sprite.getWidth()/2, location.y+sprite.getHeight()/2), new Vector2(10,5));
+		}
+	}
+	
 	private void physics(float delta){		
 		if(jump){
 			float movement = speedVer*delta;
@@ -105,7 +113,7 @@ public class Mario implements MoveableObject{
 			}
 		}
 		if(falling){
-			int movement = (int)(speedVer*delta);
+			float movement = speedVer*delta;
 			boolean y = true;
 			for(int i = 0; i < movement; i++){
 				if((pointAtCord((location.x),(location.y-i))||pointAtCord((location.x+31),(location.y-i)))){
@@ -121,8 +129,8 @@ public class Mario implements MoveableObject{
 				
 				location.y -= movement;
 				speedVer += vertMult*delta;
-				if(speedVer>maxSpeedVer){
-					speedVer=maxSpeedVer;
+				if(speedVer>speedVertNorm){
+					speedVer=speedVertNorm;
 				}
 			}
 		}
@@ -172,6 +180,7 @@ public class Mario implements MoveableObject{
 				falling = true;
 			}
 		}
+	}
 		/*
 		if(movingRight && !movingLeft){
 			if(!field.fieldIsFull((int)((location.x-31)/32) + sizeX+ 1, (int)(location.y/32))
@@ -184,6 +193,9 @@ public class Mario implements MoveableObject{
 				speedHor = 1;
 			}
 		}
+	}
+	
+	private void physics(){
 		if(jump){
 			if((!field.fieldIsFull((int)(location.x/32), (int)(location.y/32) + sizeY+1) &&
 					!field.fieldIsFull((int)((location.x+31)/32), (int)(location.y/32) + sizeY+1)
@@ -265,8 +277,6 @@ public class Mario implements MoveableObject{
 				speedHor = 1;
 			}
 		}*/
-		
-	}
 	
 	public void update(float delta){
 		physics(delta);
