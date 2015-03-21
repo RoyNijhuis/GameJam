@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -19,6 +20,7 @@ public class Main extends ApplicationAdapter {
 	private static Mario mario;
 	private static Ghost ghost;
 	private static ArrayList<Object> objects;
+	private static Sound sound;
 	private static ArrayList<Object> remove;
 	
 	@Override
@@ -30,10 +32,12 @@ public class Main extends ApplicationAdapter {
 		field1 = new Field();
 		objects.add(field1);
 		mario = new Mario(field1);
+		sound = Gdx.audio.newSound(Gdx.files.internal("essai01.wav"));
 		objects.add(mario);
 		background = new Sprite(new Texture(BACKGROUND_PATH));
 		Gdx.input.setInputProcessor(new InputProcessor(mario));
 		objects.add(ghost = new Ghost(new Vector2(0,0), mario));
+		sound.loop();
 	}
 	
 	public static Mario getMario() {

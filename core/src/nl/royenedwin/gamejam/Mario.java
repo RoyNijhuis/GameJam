@@ -307,9 +307,10 @@ public class Mario implements MoveableObject{
 			batch.draw(heart, 10 + 74*i, 10, heart.getWidth()*Main.SCALING_FACTOR.x, heart.getHeight()*Main.SCALING_FACTOR.y);
 		}
 		int c = 0;
+		System.out.println(chestItems.size());
 		for(ChestItem z: chestItems){
 			c++;
-			batch.draw(z.getSprite(), 1900 - 74*c, 10, z.getSprite().getWidth()*Main.SCALING_FACTOR.x, z.getSprite().getHeight()*Main.SCALING_FACTOR.y);
+			batch.draw(z.getSprite(), 1900*Main.SCALING_FACTOR.x - 74*c*Main.SCALING_FACTOR.x, 10, z.getSprite().getWidth()*Main.SCALING_FACTOR.x, z.getSprite().getHeight()*Main.SCALING_FACTOR.y);
 		}
 
 		if(lastFacedDirectionIsLeft) {
