@@ -24,8 +24,8 @@ public class Mario implements MoveableObject{
 		movingLeft = false;
 		movingRight = false;
 		falling = true;
-		sizeX = 2;
-		sizeY = 3;
+		sizeX = 1;
+		sizeY = 2;
 		location = new Vector2(32,500);
 	}
 	
@@ -54,7 +54,6 @@ public class Mario implements MoveableObject{
 	private void physics(){
 		if(jump){
 			if(!field.fieldIsFull((int)(location.x/32), (int)(location.y/32) + sizeY+1)
-					&& !field.fieldIsFull((int)(location.x/32)+1, (int)(location.y/32) + sizeY+1)
 					&& jumpStartLocation.y < location.y+96){//TODO check field up
 				location.y++;
 			} else {
@@ -65,7 +64,7 @@ public class Mario implements MoveableObject{
 		}
 		if(falling){
 			if(!field.fieldIsFull((int)(location.x/32), (int)(location.y/32) -1)
-					&& !field.fieldIsFull((int)(location.x/32)+1, (int)(location.y/32) -1)){//TODO check field up
+					|| location.y%32 != 0){
 				location.y--;
 			} else {
 				falling = false;
@@ -74,8 +73,7 @@ public class Mario implements MoveableObject{
 		
 		if(movingLeft && !movingRight){
 			if(!field.fieldIsFull((int)(location.x/32) - 1, (int)(location.y/32))
-					&& !field.fieldIsFull((int)(location.x/32)-1, (int)(location.y/32) +1)
-					&& !field.fieldIsFull((int)(location.x/32)-1, (int)(location.y/32) +2)){//TODO check field up
+					&& !field.fieldIsFull((int)(location.x/32)-1, (int)(location.y/32) +1)){//TODO check field up
 				location.x--;
 			} /*else{
 				movingLeft = false;
@@ -84,8 +82,7 @@ public class Mario implements MoveableObject{
 		
 		if(movingRight && !movingLeft){
 			if(!field.fieldIsFull((int)(location.x/32) + sizeX+ 1, (int)(location.y/32))
-					&& !field.fieldIsFull((int)(location.x/32) + sizeX +1, (int)(location.y/32) +1)
-					&& !field.fieldIsFull((int)(location.x/32) + sizeX +1, (int)(location.y/32) +2)){//TODO check field up
+					&& !field.fieldIsFull((int)(location.x/32) + sizeX +1, (int)(location.y/32) +1)){//TODO check field up
 				location.x++;
 			} /*else{
 				movingRight = false;
@@ -107,7 +104,7 @@ public class Mario implements MoveableObject{
 
 	@Override
 	public void render(SpriteBatch batch) {
-		batch.draw(sprite, location.x*Main.SCALING_FACTOR.x, location.y*Main.SCALING_FACTOR.y, 4*sprite.getWidth()*Main.SCALING_FACTOR.x, 3*sprite.getHeight()*Main.SCALING_FACTOR.y);
+		batch.draw(sprite, location.x*Main.SCALING_FACTOR.x, location.y*Main.SCALING_FACTOR.y, 2*sprite.getWidth()*Main.SCALING_FACTOR.x, 2*sprite.getHeight()*Main.SCALING_FACTOR.y);
 	}
 	
 }
