@@ -2,9 +2,10 @@ package nl.royenedwin.gamejam;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
-public class Mario implements MovableObject{
+public class Mario implements MoveableObject{
 	private int sizeX;
 	private int sizeY;
 	private Vector2 location;
@@ -13,7 +14,7 @@ public class Mario implements MovableObject{
 	private boolean jump;
 	private boolean falling;
 	private Field field;
-	public static final String TEXTURE_PATH = "block.png";//TODO change
+	public static final String TEXTURE_PATH = "mario.png";//TODO change
 	private static Sprite sprite = new Sprite(new Texture(TEXTURE_PATH));
 	
 	public Mario(Field field){
@@ -65,14 +66,13 @@ public class Mario implements MovableObject{
 		
 	}
 	
-	@Override
 	public void update(){
 		physics();
 	}
 
 	@Override
-	public void render() {
-		batch.draw(sprite, x, y);// TODO Auto-generated method stub
+	public void render(SpriteBatch batch) {
+		batch.draw(sprite, location.x, location.y);
 		
 	}
 	
