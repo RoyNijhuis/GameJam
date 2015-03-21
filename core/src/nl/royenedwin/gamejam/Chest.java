@@ -33,9 +33,9 @@ public class Chest implements StaticObject, Collidable {
 	}
 
 	public void isTouched(Object o) {
-		if(o instanceof Mario) {
+		if(o instanceof Mario && !isOpen) {
 			isOpen = true;
-			Main.getMario().addChestItem(item);
+			Mario.addChestItem(item);
 		}
 	}
 
