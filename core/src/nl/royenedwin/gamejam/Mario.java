@@ -88,6 +88,9 @@ public class Mario implements MoveableObject{
 		movingLeft = false;
 		walkedPixels = 0;
 		sprite = new Sprite(new Texture(TEXTURE_PATH));
+		if(movingRight) {
+			lastFacedDirectionIsLeft = false;
+		}
 	}
 	
 	public void inputNoRight(){
@@ -95,6 +98,9 @@ public class Mario implements MoveableObject{
 		movingRight = false;
 		walkedPixels = 0;
 		sprite = new Sprite(new Texture(TEXTURE_PATH));
+		if(movingLeft) {
+			lastFacedDirectionIsLeft = true;
+		}
 	}
 	
 	public boolean pointAtCord(float x, float y) {

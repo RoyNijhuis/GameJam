@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
-public class Chest implements StaticObject{
+public class Chest implements StaticObject, Collidable {
 	public static final String TEXTURE_PATH_CLOSED = "chest.png";
 	public static final String TEXTURE_PATH_OPEN = "chest_open.png";
 	private static Sprite closedSprite = new Sprite(new Texture(TEXTURE_PATH_CLOSED));
@@ -29,8 +29,8 @@ public class Chest implements StaticObject{
 			batch.draw(closedSprite, position.x*Main.SCALING_FACTOR.x, position.y*Main.SCALING_FACTOR.y, closedSprite.getWidth()*Main.SCALING_FACTOR.x, closedSprite.getHeight()*Main.SCALING_FACTOR.y);
 		}
 	}
-	
-	public void isTouched() {
-		isOpen = true;
+
+	public void isTouched(Object o) {
+		
 	}
 }

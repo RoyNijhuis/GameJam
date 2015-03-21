@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
-public class Door implements StaticObject{
+public class Door implements StaticObject, Collidable{
 
 	public static final String TEXTURE_PATH_CLOSED = "door1_closed.png";
 	public static final String TEXTURE_PATH_OPEN = "door_open.png";
@@ -30,8 +30,8 @@ public class Door implements StaticObject{
 			batch.draw(closedSprite, position.x*Main.SCALING_FACTOR.x, position.y*Main.SCALING_FACTOR.y, closedSprite.getWidth()*Main.SCALING_FACTOR.x, closedSprite.getHeight()*Main.SCALING_FACTOR.y);
 		}
 	}
-	
-	public void isTouched() {
+
+	public void isTouched(Object o) {
 		
 	}
 }

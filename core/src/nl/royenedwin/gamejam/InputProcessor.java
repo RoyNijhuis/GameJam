@@ -20,6 +20,7 @@ public class InputProcessor extends InputAdapter {
 		} else if(keycode == Keys.W || keycode == Keys.UP) {
 			mario.inputUp();
 		} else if(keycode == Keys.SPACE) {
+			System.out.println("SHOOT BITCH");
 			mario.shoot();
 		}
 		System.out.println("key down");
