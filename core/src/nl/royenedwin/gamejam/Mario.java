@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 public class Mario implements MoveableObject{
+	private int lives;
 	private int sizeX;
 	private int sizeY;
 	private Vector2 location;
@@ -18,6 +19,7 @@ public class Mario implements MoveableObject{
 	private boolean falling;
 	private Field field;
 	public static final String TEXTURE_PATH = "mario.png";//TODO change
+	public static final String TEXTURE_PATH_HEART = "heart.png";
 	public static final String TEXTURE_PATH_WALK1 = "mario_1.png";
 	public static final String TEXTURE_PATH_WALK2 = "mario_2.png";
 	public static final String TEXTURE_PATH_WALK3 = "mario_3.png";
@@ -26,6 +28,7 @@ public class Mario implements MoveableObject{
 	public static final String TEXTURE_PATH_WALK6 = "mario_6.png";
 	private int current_animation;
 	private int walkedPixels;
+	private static Sprite heart = new Sprite(new Texture(TEXTURE_PATH_HEART));
 	private static Sprite sprite = new Sprite(new Texture(TEXTURE_PATH));
 	private float speedHor;
 	private float speedVer;
@@ -39,6 +42,7 @@ public class Mario implements MoveableObject{
 	private Vector2 locationBlock;
 	
 	public Mario(Field field){
+		lives = 3;
 		this.field = field;
 		walkedPixels = 0;
 		current_animation = 0;
@@ -206,7 +210,7 @@ public class Mario implements MoveableObject{
 		
 		if(!jump && !falling){
 			if(!field.fieldIsFull((int)(location.x/32), (int)(location.y/32) -1)
-					&& !field.fieldIsFull((int)(location.x/32)+1, (int)(location.y/32) -1)){//TODO check field up
+					&& !field.fieldIsFull((int)(location.x/32)+1, (int)(location.y/32) -1)){
 				falling = true;
 				speedVer = 0;
 			}
@@ -271,9 +275,16 @@ public class Mario implements MoveableObject{
 			}
 		}
 	}
-
+	
+	public void takeLive(){
+		lives--;
+	}
 	@Override
 	public void render(SpriteBatch batch) {
+		for(int i = 0; i<lives; i++){
+			batch.draw(heart, 10 + 74*i, 10, heart.getWidth()*Main.SCALING_FACTOR.x, heart.getHeight()*Main.SCALING_FACTOR.y);
+		}
+
 		if(lastFacedDirectionIsLeft) {
 			if(!sprite.isFlipX()) {
 				sprite.flip(true, false);
