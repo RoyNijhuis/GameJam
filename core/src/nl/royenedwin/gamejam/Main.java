@@ -19,6 +19,7 @@ public class Main extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		field1 = new Field();
 		mario = new Mario(field1);
+		Gdx.input.setInputProcessor(new InputProcessor(mario));
 	}
 
 	@Override
