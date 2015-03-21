@@ -19,14 +19,15 @@ public class Mario implements MoveableObject{
 	
 	public Mario(Field field){
 		this.field = field;
-		sizeX = 1;
+		sizeX = 2;
 		sizeY = 3;
 		location = new Vector2(0,0);
 	}
 	
 	private void physics(){
 		if(jump){
-			if(true){//TODO check field up
+			if(!field.fieldIsFull((int)(location.x/32), (int)(location.y/32) + sizeY+1)
+					&& !field.fieldIsFull((int)(location.x/32)+1, (int)(location.y/32) + sizeY+1)){//TODO check field up
 				location.y++;
 			} else {
 				jump = false;
@@ -35,7 +36,8 @@ public class Mario implements MoveableObject{
 			
 		}
 		if(falling){
-			if(true){//TODO check field down
+			if(!field.fieldIsFull((int)(location.x/32), (int)(location.y/32) -1)
+					&& !field.fieldIsFull((int)(location.x/32)+1, (int)(location.y/32) -1)){//TODO check field up
 				location.y--;
 			} else {
 				falling = false;
@@ -43,7 +45,9 @@ public class Mario implements MoveableObject{
 		}
 		
 		if(movingLeft && !movingRight){
-			if(true){//TODO check field left
+			if(!field.fieldIsFull((int)(location.x/32) - 1, (int)(location.y/32))
+					&& !field.fieldIsFull((int)(location.x/32)-1, (int)(location.y/32) +1)
+					&& !field.fieldIsFull((int)(location.x/32)-1, (int)(location.y/32) +2)){//TODO check field up
 				location.x--;
 			} else{
 				movingLeft = false;
@@ -51,7 +55,9 @@ public class Mario implements MoveableObject{
 		}
 		
 		if(movingRight && !movingLeft){
-			if(true){//TODO check field right
+			if(!field.fieldIsFull((int)(location.x/32) + sizeX+ 1, (int)(location.y/32))
+					&& !field.fieldIsFull((int)(location.x/32) + sizeX +1, (int)(location.y/32) +1)
+					&& !field.fieldIsFull((int)(location.x/32) + sizeX +1, (int)(location.y/32) +2)){//TODO check field up
 				location.x++;
 			} else{
 				movingRight = false;
@@ -59,7 +65,8 @@ public class Mario implements MoveableObject{
 		}
 		
 		if(!jump && !falling){
-			if(true){//TODO check field under
+			if(!field.fieldIsFull((int)(location.x/32), (int)(location.y/32) -1)
+					&& !field.fieldIsFull((int)(location.x/32)+1, (int)(location.y/32) -1)){//TODO check field up
 				falling = true;
 			}
 		}
