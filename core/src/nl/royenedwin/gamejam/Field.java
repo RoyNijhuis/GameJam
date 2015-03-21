@@ -12,17 +12,17 @@ public class Field implements Drawable, Updateable{
 	
 	public Field() {
 		Texture level1 = new Texture("level1.png");
-		fields = new StaticObject[level1.getHeight()][level1.getWidth()];
+		fields = new StaticObject[level1.getWidth()][level1.getHeight()];
 		level1.getTextureData().prepare();
 		Pixmap tmp = level1.getTextureData().consumePixmap();
 		for(int x=0;x<60;x++) {
 			for(int y=0;y<34;y++) {
-				System.out.println("x=" + (33-y) + " y=" + x + " color=" + tmp.getPixel(33-y, x));
+				System.out.println("x=" + (33-y) + " y=" + x + " color=" + tmp.getPixel(x, 33-y));
 				//fields[33-y][x];
-				if(tmp.getPixel(33-y, x) == 255) {
-					fields[33-y][x] = new Block();
+				if(tmp.getPixel(x, 33-y) == 255) {
+					fields[x][33-y] = new Block();
 				} else {
-					fields[33-y][x] = null;
+					fields[x][33-y] = null;
 				}
 			}
 		}
@@ -30,8 +30,8 @@ public class Field implements Drawable, Updateable{
 		//set positions
 		for(int x=0;x<60;x++) {
 			for(int y=0;y<34;y++) {
-				if(fields[33-y][x] != null) {
-					fields[33-y][x].setPosition(new Vector2((33-y)*32,x*32));
+				if(fields[x][33-y] != null) {
+					fields[x][33-y].setPosition(new Vector2(x*32,(33-y)*32));
 				}
 			}
 		}
