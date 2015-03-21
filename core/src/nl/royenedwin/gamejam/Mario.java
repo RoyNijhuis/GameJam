@@ -16,6 +16,14 @@ public class Mario implements MoveableObject{
 	private boolean falling;
 	private Field field;
 	public static final String TEXTURE_PATH = "mario.png";//TODO change
+	public static final String TEXTURE_PATH_WALK1 = "mario_1.png";
+	public static final String TEXTURE_PATH_WALK2 = "mario_2.png";
+	public static final String TEXTURE_PATH_WALK3 = "mario_3.png";
+	public static final String TEXTURE_PATH_WALK4 = "mario_4.png";
+	public static final String TEXTURE_PATH_WALK5 = "mario_5.png";
+	public static final String TEXTURE_PATH_WALK6 = "mario_6.png";
+	private int current_animation;
+	private int walkedPixels;
 	private static Sprite sprite = new Sprite(new Texture(TEXTURE_PATH));
 	private float speedHor;
 	private float speedVer;
@@ -25,9 +33,12 @@ public class Mario implements MoveableObject{
 	private float maxSpeedVer;
 	private float horMult;
 	private float vertMult;
+	private boolean lastFacedDirectionIsLeft;
 	
 	public Mario(Field field){
 		this.field = field;
+		walkedPixels = 0;
+		current_animation = 0;
 		jump = false;
 		movingLeft = false;
 		movingRight = false;
@@ -43,6 +54,7 @@ public class Mario implements MoveableObject{
 		horMult = 100;
 		vertMult = 360;
 		location = new Vector2(100,500);
+		lastFacedDirectionIsLeft = false;
 	}
 	
 	public void inputUp(){
@@ -58,6 +70,7 @@ public class Mario implements MoveableObject{
 			speedHor = speedHorNorm;
 			movingLeft = true;
 		}	
+		lastFacedDirectionIsLeft = true;
 	}
 	
 	public void inputRight(){
@@ -65,16 +78,21 @@ public class Mario implements MoveableObject{
 			speedHor = speedHorNorm;
 			movingRight = true;
 		}		
+		lastFacedDirectionIsLeft = false;
 	}
 	
 	public void inputNoLeft(){
 		speedHor = speedHorNorm;
 		movingLeft = false;
+		walkedPixels = 0;
+		sprite = new Sprite(new Texture(TEXTURE_PATH));
 	}
 	
 	public void inputNoRight(){
 		speedHor = speedHorNorm;
 		movingRight = false;
+		walkedPixels = 0;
+		sprite = new Sprite(new Texture(TEXTURE_PATH));
 	}
 	
 	public boolean pointAtCord(float x, float y) {
@@ -82,9 +100,9 @@ public class Mario implements MoveableObject{
 	}
 	
 	public void shoot() {
-		if(movingLeft) {
+		if(lastFacedDirectionIsLeft) {
 			Main.createStone(new Vector2(location.x+sprite.getWidth()/2, location.y+sprite.getHeight()/2), new Vector2(-10,5));
-		} else if(movingRight){
+		} else {
 			Main.createStone(new Vector2(location.x+sprite.getWidth()/2, location.y+sprite.getHeight()/2), new Vector2(10,5));
 		}
 	}
@@ -152,6 +170,7 @@ public class Mario implements MoveableObject{
 				if(speedHor>maxSpeedHor){
 					speedHor=maxSpeedHor;
 				}
+				walkedPixels+=movement;
 			}
 		}
 		if(movingRight && !movingLeft){
@@ -171,6 +190,7 @@ public class Mario implements MoveableObject{
 				if(speedHor>maxSpeedHor){
 					speedHor=maxSpeedHor;
 				}
+				walkedPixels+=movement;
 			}
 		}
 		
@@ -178,6 +198,7 @@ public class Mario implements MoveableObject{
 			if(!field.fieldIsFull((int)(location.x/32), (int)(location.y/32) -1)
 					&& !field.fieldIsFull((int)(location.x/32)+1, (int)(location.y/32) -1)){//TODO check field up
 				falling = true;
+				speedVer = 0;
 			}
 		}
 	}
@@ -280,11 +301,50 @@ public class Mario implements MoveableObject{
 	
 	public void update(float delta){
 		physics(delta);
+		
+		if(movingLeft || movingRight) {
+			switch(current_animation) {
+			case 0:
+				sprite = new Sprite(new Texture(TEXTURE_PATH_WALK1));
+				break;
+			case 1:
+				sprite = new Sprite(new Texture(TEXTURE_PATH_WALK2));
+				break;
+			case 2:
+				sprite = new Sprite(new Texture(TEXTURE_PATH_WALK3));
+				break;
+			case 3:
+				sprite = new Sprite(new Texture(TEXTURE_PATH_WALK4));
+				break;
+			case 4:
+				sprite = new Sprite(new Texture(TEXTURE_PATH_WALK5));
+				break;
+			case 5:
+				sprite = new Sprite(new Texture(TEXTURE_PATH_WALK6));
+				break;
+			}
+			
+			if(walkedPixels >= 20) {
+				if(current_animation != 5) {
+					current_animation++;
+				} else {
+					current_animation = 0;
+				}
+				walkedPixels = 0;
+			}
+		}
 	}
 
 	@Override
 	public void render(SpriteBatch batch) {
-		batch.draw(sprite, location.x*Main.SCALING_FACTOR.x, location.y*Main.SCALING_FACTOR.y, 2*sprite.getWidth()*Main.SCALING_FACTOR.x, 2*sprite.getHeight()*Main.SCALING_FACTOR.y);
+		if(lastFacedDirectionIsLeft) {
+			if(!sprite.isFlipX()) {
+				sprite.flip(true, false);
+			}
+			batch.draw(sprite, location.x*Main.SCALING_FACTOR.x, location.y*Main.SCALING_FACTOR.y, sprite.getWidth()*Main.SCALING_FACTOR.x, sprite.getHeight()*Main.SCALING_FACTOR.y);
+		} else {
+			batch.draw(sprite, location.x*Main.SCALING_FACTOR.x, location.y*Main.SCALING_FACTOR.y, sprite.getWidth()*Main.SCALING_FACTOR.x, sprite.getHeight()*Main.SCALING_FACTOR.y);
+		}
 	}
 	
 }
