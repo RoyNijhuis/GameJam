@@ -12,11 +12,13 @@ public class Ghost implements MoveableObject{
 	private Vector2 velocity;
 	private Mario mario;
 	private float rotation;
+	private float timePassed;
 	
 	public Ghost(Vector2 position, Mario mario) {
 		this.position = position;
 		this.mario = mario;
 		rotation = 0;
+		timePassed = 0;
 	}
 	
 	@Override
@@ -43,6 +45,14 @@ public class Ghost implements MoveableObject{
 		rotation += relativeAngleToTarget;
 		position.x += Math.cos(rotation) * 100*delta;
 		position.y += Math.sin(rotation) * 100*delta;
+		if(timePassed > 0){
+			timePassed -= delta;
+		}
+		if((int)(position.x/32) == (int)(marioPos.x/32) && (int)(position.y/32) == (int)(marioPos.y/32) && timePassed<0){
+			System.out.println("COLLISION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			mario.takeLive();
+			timePassed = 5;
+		}
 	}
 
 	@Override

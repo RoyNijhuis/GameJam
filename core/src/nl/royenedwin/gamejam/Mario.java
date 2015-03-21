@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 public class Mario implements MoveableObject{
+	private int lives;
 	private int sizeX;
 	private int sizeY;
 	private Vector2 location;
@@ -39,6 +40,7 @@ public class Mario implements MoveableObject{
 	private Vector2 locationBlock;
 	
 	public Mario(Field field){
+		lives = 3;
 		this.field = field;
 		walkedPixels = 0;
 		current_animation = 0;
@@ -271,9 +273,16 @@ public class Mario implements MoveableObject{
 			}
 		}
 	}
-
+	
+	public void takeLive(){
+		lives--;
+	}
 	@Override
 	public void render(SpriteBatch batch) {
+		for(int i = 0; i<lives; i++){
+			//batch.draw(heart, 10 + 74*i, 10)
+		}
+
 		if(lastFacedDirectionIsLeft) {
 			if(!sprite.isFlipX()) {
 				sprite.flip(true, false);
