@@ -108,9 +108,6 @@ public class Field implements Drawable, Updateable{
 						fields[x][y] = new AutoTurret(false);
 						collidingObjects.add((Collidable) fields[x][y]);
 						updateableObjects.add((Updateable)fields[x][y]);
-						fields[x][y-1] = new FullWalk();
-						fields[x+1][y-1] = new FullWalk();
-						fields[x+1][y] = new FullWalk();
 					} else if(color.r==0.6392157f && color.g==0.28627452f && color.b == 0.6431373f) {
 						//purple => random chest
 						fields[x][y] = new Chest(new HeartItem());
@@ -148,8 +145,8 @@ public class Field implements Drawable, Updateable{
 		return fields;
 	}
 	
-	public void setField(Vector2 pos, StaticObject object) {
-		this.fields[(int)pos.x][(int)pos.y] = object;
+	public static void setField(Vector2 pos, StaticObject object) {
+		Field.fields[(int)pos.x][(int)pos.y] = object;
 	}
 	
 	@Override

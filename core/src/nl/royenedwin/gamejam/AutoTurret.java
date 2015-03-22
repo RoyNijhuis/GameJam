@@ -76,17 +76,19 @@ public class AutoTurret implements StaticObject, Collidable, Updateable{
 			}
 		} else {
 			
-			batch.draw(sprite, pickedUp.getPositionPixels().x*Game.SCALING_FACTOR.x, pickedUp.getPositionPixels().y*Game.SCALING_FACTOR.y, sprite.getWidth()*Game.SCALING_FACTOR.x, sprite.getHeight()*Game.SCALING_FACTOR.y);
+			//batch.draw(sprite, pickedUp.getPositionPixels().x*Game.SCALING_FACTOR.x, pickedUp.getPositionPixels().y*Game.SCALING_FACTOR.y, sprite.getWidth()*Game.SCALING_FACTOR.x, sprite.getHeight()*Game.SCALING_FACTOR.y);
 		}
 	}
 	
 	public void pickup() {
 		pickedUp = Game.getMario();
+		Field.setField(new Vector2((int)(position.x/32), 33-(int)(position.y/32)), null);
 	}
 	
 	public void place() {
 		facingLeft = pickedUp.lastFacedDirectionIsLeft();
 		pickedUp = null;
+		Field.setField(new Vector2((int)(position.x/32), 33-(int)(position.y/32)), this);
 	}
 
 	public Vector2 getPostition() {
