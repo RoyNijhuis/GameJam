@@ -17,7 +17,6 @@ public class MainMenu implements Screen {
 	
 	public MainMenu(Main main) {
 		this.main = main;
-		System.out.println("test");
 	}
 	
 	@Override
@@ -34,11 +33,10 @@ public class MainMenu implements Screen {
 		batch.end();
 		if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
 			if(Gdx.input.getX() > 140*SCALING_FACTOR.x && Gdx.input.getX() < 640*SCALING_FACTOR.x && Gdx.input.getY() > 490*SCALING_FACTOR.y && Gdx.input.getY() < 870*SCALING_FACTOR.y) {
-				main.setScreen(new Game(main, 4, false));
+				main.setScreen(new Game(main, 1, false));
 			}
 		}
 	}
-
 	@Override
 	public void resize(int width, int height) {
 		

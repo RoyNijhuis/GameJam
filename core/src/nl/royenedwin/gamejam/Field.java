@@ -38,7 +38,7 @@ public class Field implements Drawable, Updateable{
 			for(int x=0;x<60;x++) {
 				for(int y=0;y<34;y++) {
 					Color color = new Color(tmp.getPixel(x, y));
-					//System.out.println(color.r + " " + color.g + " " + color.b);
+					System.out.println(color.r + " " + color.g + " " + color.b);
 					if(tmp.getPixel(x, y) == 255) {
 						fields[x][y] = new Block();
 					} else if(color.r==0.011764706f && color.g==0.5529412f && color.b == 0f) {
@@ -124,7 +124,13 @@ public class Field implements Drawable, Updateable{
 						fields[x][y+1] = new FullWalk();
 						fields[x+1][y+1] = new FullWalk();
 						fields[x+2][y+1] = new FullWalk();
+					}  else if(color.r==0.94509804f && color.g==1f && color.b == 0.32156864f) {
+						//light yellow => mine
+						fields[x][y] = new Mine();
+						collidingObjects.add((Collidable) fields[x][y]);
+						updateableObjects.add((Updateable) fields[x][y]);
 					}
+					
 						else {
 						if(!(fields[x][y] instanceof FullWalk) && !(fields[x][y] instanceof FullNotWalk)) {
 							fields[x][y] = null;
