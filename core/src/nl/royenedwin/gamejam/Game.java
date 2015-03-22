@@ -12,7 +12,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 public class Game implements Screen{
-	public static final String BACKGROUND_PATH = "background0.jpg";
+	public static final String BACKGROUND_PATH0 = "background0.jpg";
+	public static final String BACKGROUND_PATH = "background2.jpg";
 	private SpriteBatch batch;
 	private Sprite background;
 	private static Field field1;
@@ -42,7 +43,11 @@ public class Game implements Screen{
 		mario = new Mario(field1);
 		sound = Gdx.audio.newSound(Gdx.files.internal("essai01.wav"));
 		objects.add(mario);
-		background = new Sprite(new Texture(BACKGROUND_PATH));
+		if(level!=0){
+			background = new Sprite(new Texture(BACKGROUND_PATH));
+		} else {
+			background = new Sprite(new Texture(BACKGROUND_PATH0));
+		}
 		Gdx.input.setInputProcessor(new InputProcessor(mario));
 		//objects.add(ghost = new Ghost(new Vector2(0,0), mario));
 		sound.loop();
