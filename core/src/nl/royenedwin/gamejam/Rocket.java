@@ -12,17 +12,20 @@ public class Rocket implements MoveableObject {
 	private Vector2 velocity;
 	private Mario mario;
 	private float rotation;
+	private float rocketRotation;
 	private RocketLauncher launcher;
 	
 	public Rocket(RocketLauncher launcher, Mario mario, Vector2 position) {
 		this.position = position;
 		this.launcher = launcher;
 		this.mario = mario;
+		rocketRotation = 0;
+		sprite.setOrigin(20, 50);
 	}
 	
 	@Override
 	public void render(SpriteBatch batch) {
-		batch.draw(sprite, position.x*Game.SCALING_FACTOR.x, position.y*Game.SCALING_FACTOR.y, 0, 0, sprite.getWidth()*Game.SCALING_FACTOR.x, sprite.getHeight()*Game.SCALING_FACTOR.y, 1, 1, rotation);
+		batch.draw(sprite, position.x*Game.SCALING_FACTOR.x, position.y*Game.SCALING_FACTOR.y, 0, 0, sprite.getWidth()*Game.SCALING_FACTOR.x, sprite.getHeight()*Game.SCALING_FACTOR.y, 1, 1, (float)Math.toDegrees(rocketRotation)+90);
 	}
 
 	@Override
@@ -42,8 +45,9 @@ public class Rocket implements MoveableObject {
 		    relativeAngleToTarget += 2*Math.PI;
 		                 
 		rotation += relativeAngleToTarget;
-		position.x += Math.cos(rotation) * 100*delta;
-		position.y += Math.sin(rotation) * 100*delta;
+		position.x += Math.cos(rotation) * 200*delta;
+		position.y += Math.sin(rotation) * 200*delta;
+		rocketRotation = rotation;
 		if((int)(position.x/32) == (int)(marioPos.x/32) && (int)(position.y/32) == (int)(marioPos.y/32)){
 			mario.takeLive();
 			launcher.remove(this);

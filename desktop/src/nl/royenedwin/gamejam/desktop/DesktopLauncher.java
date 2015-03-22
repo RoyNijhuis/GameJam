@@ -8,8 +8,9 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.title = "Puzzle Jam!";
-		config.width = 1080;
-		config.height = 720;
+		config.width = 1920;
+		config.height = 1080;
+		config.fullscreen = true;
 		new LwjglApplication(new Main(), config);
 	}
 }

@@ -19,6 +19,7 @@ public class Game implements Screen{
 	private static Field field1;
 	public static Vector2 SCALING_FACTOR;
 	private static Mario mario;
+	private static boolean spawnGhost;
 	private static Ghost ghost;
 	private static ArrayList<Object> objects;
 	private static Sound sound;
@@ -26,10 +27,11 @@ public class Game implements Screen{
 	private static Main main;
 	private static int level;
 	
-	public Game(Main main, int level) {
+	public Game(Main main, int level, boolean spawnGhost) {
 		this.main = main;
 		this.level = level;
 		System.out.println("level " + level);
+		this.spawnGhost = spawnGhost;
 	}
 	
 	@Override
@@ -41,6 +43,9 @@ public class Game implements Screen{
 		field1 = new Field(level);
 		objects.add(field1);
 		mario = new Mario(field1);
+		if(spawnGhost) {
+			objects.add(ghost = new Ghost(new Vector2(0,0), mario));
+		}
 		sound = Gdx.audio.newSound(Gdx.files.internal("essai01.wav"));
 		objects.add(mario);
 		if(level!=0){
@@ -49,7 +54,6 @@ public class Game implements Screen{
 			background = new Sprite(new Texture(BACKGROUND_PATH0));
 		}
 		Gdx.input.setInputProcessor(new InputProcessor(mario));
-		//objects.add(ghost = new Ghost(new Vector2(0,0), mario));
 		sound.loop();
 	}
 	
@@ -63,7 +67,11 @@ public class Game implements Screen{
 	}
 	
 	public static void nextLevel() {
-		main.setScreen(new Game(main, level+1));
+		boolean g = false;
+		if(level+1==2 || level+1 ==3) {
+			g = true;
+		}
+		main.setScreen(new Game(main, level+1, g));
 		sound.stop();
 		sound.dispose();
 	}
@@ -142,7 +150,11 @@ public class Game implements Screen{
 	public static void restart() {
 		//TODO draw screen
 		//TODO sleep
-		main.setScreen(new Game(main, level));
+		boolean g = false;
+		if(level==2 || level ==3) {
+			g = true;
+		}
+		main.setScreen(new Game(main, level+1, g));
 		sound.stop();
 		sound.dispose();
 	}
