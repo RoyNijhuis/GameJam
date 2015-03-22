@@ -1,5 +1,8 @@
 package nl.royenedwin.gamejam;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -35,7 +38,15 @@ public class Chest implements StaticObject, Collidable {
 	public void isTouched(Object o) {
 		if(o instanceof Mario && !isOpen) {
 			isOpen = true;
-			Mario.addChestItem(item);
+			if(item instanceof RandomItem){
+				Random random = new Random();
+				int i = random.nextInt(100);
+				if(i <= 99){
+					Game.getMario().addLive();
+				}
+			} else{
+				Mario.addChestItem(item);
+			}
 		}
 	}
 

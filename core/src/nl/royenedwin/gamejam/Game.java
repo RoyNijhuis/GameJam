@@ -15,7 +15,7 @@ public class Game implements Screen{
 	public static final String BACKGROUND_PATH = "background2.jpg";
 	private SpriteBatch batch;
 	private Sprite background;
-	private Field field1;
+	private static Field field1;
 	public static Vector2 SCALING_FACTOR;
 	private static Mario mario;
 	private static Ghost ghost;
@@ -49,6 +49,7 @@ public class Game implements Screen{
 	}
 	
 	public static void kill() {
+		field1 = null;
 		main.setScreen(new MainMenu(main));
 		sound.stop();
 		sound.dispose();

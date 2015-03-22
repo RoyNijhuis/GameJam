@@ -342,5 +342,10 @@ public class Mario implements MoveableObject{
 	public Vector2 getPosition() {
 		return new Vector2((int)(location.x/32),(int)(location.y/32));
 	}
+
+	public void addLive() {
+		lives++;
+		
+	}
 	
 }
