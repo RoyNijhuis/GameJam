@@ -45,19 +45,19 @@ public class Grenade implements MoveableObject, RandomItem{
 		Ghost ghost = Game.getGhost();
 		if(ghost != null) {
 			if((int)(position.x/32) == (int)(ghost.getPosition().x/32) && (int)(position.y/32) == (int)(ghost.getPosition().y/32)){
-				ghost.hit();
+				ghost.hit2();
 				Game.removeObject(this);
 				sound.play();
 			} else if((int)(position.x/32) == (int)(ghost.getPosition().x/32)+1 && (int)(position.y/32) == (int)(ghost.getPosition().y/32)){
-				ghost.hit();
+				ghost.hit2();
 				Game.removeObject(this);
 				sound.play();
 			} else if((int)(position.x/32) == (int)(ghost.getPosition().x/32) && (int)(position.y/32) == (int)(ghost.getPosition().y/32)+1){
-				ghost.hit();
+				ghost.hit2();
 				Game.removeObject(this);
 				sound.play();
 			} else if((int)(position.x/32) == (int)(ghost.getPosition().x/32)+1 && (int)(position.y/32) == (int)(ghost.getPosition().y/32)+1){
-				ghost.hit();
+				ghost.hit2();
 				Game.removeObject(this);
 				sound.play();
 			}

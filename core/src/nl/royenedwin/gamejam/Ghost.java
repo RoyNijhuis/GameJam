@@ -29,6 +29,14 @@ public class Ghost implements MoveableObject{
 		}
 	}
 	
+	public void hit2(){
+		if(mario.getPositionPixels().x > position.x){
+			position.x -= 200;
+		} else {
+			position.x += 200;
+		}
+	}
+	
 	@Override
 	public void render(SpriteBatch batch) {
 		batch.draw(sprite, position.x*Game.SCALING_FACTOR.x, position.y*Game.SCALING_FACTOR.y, sprite.getWidth()*Game.SCALING_FACTOR.x, sprite.getHeight()*Game.SCALING_FACTOR.y);
