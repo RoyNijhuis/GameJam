@@ -93,7 +93,12 @@ public class Mario implements MoveableObject{
 				}
 			}
 		} else {
-			
+			if(Field.fieldIsEmpty((int)(location.x/32), (int)(location.y/32)) && Field.fieldIsEmpty((int)(location.x/32)+1, (int)(location.y/32)) && Field.fieldIsEmpty((int)(location.x/32)+1, (int)(location.y/32)+1) && Field.fieldIsEmpty((int)(location.x/32), (int)(location.y/32)+1)){
+				//velden zijn leeg, dus turret kan geplaatst worden
+				isCarryingTurret.setPosition(new Vector2(location.x-(location.x%32), location.y-(location.y%32)));
+				isCarryingTurret.place();
+				isCarryingTurret = null;
+			}
 		}
 	}
 	

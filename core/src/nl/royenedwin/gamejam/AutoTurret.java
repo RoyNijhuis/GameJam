@@ -52,6 +52,10 @@ public class AutoTurret implements StaticObject, Collidable, Updateable{
 	public void pickup() {
 		pickedUp = Game.getMario();
 	}
+	
+	public void place() {
+		pickedUp = null;
+	}
 
 	public Vector2 getPostition() {
 		return position;
