@@ -167,4 +167,8 @@ public class AutoTurret implements StaticObject, Collidable, Updateable{
 		disabled = true;
 		disableTime = 5;
 	}
+	
+	public void hit2() {
+		Field.setField(new Vector2((int)(position.x/32), 33-(int)(position.y/32)), null);
+	}
 }

@@ -72,19 +72,19 @@ public class Grenade implements MoveableObject, RandomItem{
 			if(x instanceof AutoTurret) {
 				AutoTurret z = (AutoTurret) x;
 				if((int)(position.x/32) == (int)(z.getPosition().x/32) && (int)(position.y/32) == (int)(z.getPosition().y/32)){
-					z.hit();
+					z.hit2();
 					Game.removeObject(this);
 					sound.play();
 				} else if((int)(position.x/32) == (int)(z.getPosition().x/32)+1 && (int)(position.y/32) == (int)(z.getPosition().y/32)){
-					z.hit();
+					z.hit2();
 					Game.removeObject(this);
 					sound.play();
 				} else if((int)(position.x/32) == (int)(z.getPosition().x/32) && (int)(position.y/32) == (int)(z.getPosition().y/32)+1){
-					z.hit();
+					z.hit2();
 					Game.removeObject(this);
 					sound.play();
 				} else if((int)(position.x/32) == (int)(z.getPosition().x/32)+1 && (int)(position.y/32) == (int)(z.getPosition().y/32)+1){
-					z.hit();
+					z.hit2();
 					Game.removeObject(this);
 					sound.play();
 				}
