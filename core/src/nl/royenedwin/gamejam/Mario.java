@@ -404,7 +404,7 @@ public class Mario implements MoveableObject{
 		int c = 0;
 		for(ChestItem z: chestItems){
 			c++;
-			batch.draw(z.getSprite(), 1900*Game.SCALING_FACTOR.x - 74*c*Game.SCALING_FACTOR.x, 10, z.getSprite().getWidth()*Game.SCALING_FACTOR.x, z.getSprite().getHeight()*Game.SCALING_FACTOR.y);
+			batch.draw(z.getSprite(), 1900*Game.SCALING_FACTOR.x - 74*c*Game.SCALING_FACTOR.x, 10, z.getSprite().getWidth()*2*Game.SCALING_FACTOR.x, z.getSprite().getHeight()*2*Game.SCALING_FACTOR.y);
 		}
 		Sprite auto = new Sprite(new Texture(AutoTurret.TEXTURE_PATH));
 		if(isCarryingTurret()) {
