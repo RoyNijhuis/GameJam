@@ -21,12 +21,17 @@ public class AutoTurret implements StaticObject, Collidable, Updateable{
 	public void render(SpriteBatch batch) {
 		batch.draw(sprite, position.x*Game.SCALING_FACTOR.x, position.y*Game.SCALING_FACTOR.y, sprite.getWidth()*Game.SCALING_FACTOR.x, sprite.getHeight()*Game.SCALING_FACTOR.y);
 		int x = (int)(position.x/32);
-		int y = (int)(position.y/32);
+		int y = (int)(position.y/32)+1;
 		
 		for(int currentX=x+1; currentX<60; currentX++) {
 			if(!Field.fieldIsFull2(currentX, y)) {
 				//niet vol, draw laser
-				batch.draw(laserSprite, currentX*Game.SCALING_FACTOR.x, (position.y+37)*Game.SCALING_FACTOR.y, laserSprite.getWidth()*Game.SCALING_FACTOR.x, laserSprite.getHeight()*Game.SCALING_FACTOR.y);
+				if(currentX == x+1) {
+					batch.draw(laserSprite, (currentX*32+16)*Game.SCALING_FACTOR.x, (position.y+37)*Game.SCALING_FACTOR.y, (laserSprite.getWidth()*Game.SCALING_FACTOR.x)/2f, laserSprite.getHeight()*Game.SCALING_FACTOR.y);
+				} else {
+					batch.draw(laserSprite, (currentX*32)*Game.SCALING_FACTOR.x, (position.y+37)*Game.SCALING_FACTOR.y, laserSprite.getWidth()*Game.SCALING_FACTOR.x, laserSprite.getHeight()*Game.SCALING_FACTOR.y);
+				}
+				
 			} else {
 				//vol, stop laser
 				break;
