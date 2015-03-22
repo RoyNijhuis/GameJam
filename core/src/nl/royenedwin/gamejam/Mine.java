@@ -32,6 +32,7 @@ public class Mine implements StaticObject, Collidable, Updateable {
 
 	public void isTouched(Object o) {
 		//TODO BOOOOOOOOOOOOOOM
+		Game.getMario().takeLive();
 		Game.addExplosion(new Explosion(position));
 		sound.play();
 		Field.removeObjectFromField(this);
