@@ -23,9 +23,12 @@ public class Game implements Screen{
 	private static Sound sound;
 	private static ArrayList<Object> remove;
 	private static Main main;
+	private int level;
 	
-	public Game(Main main) {
+	public Game(Main main, int level) {
 		this.main = main;
+		this.level = level;
+		System.out.println("level " + level);
 	}
 	
 	@Override
@@ -34,7 +37,7 @@ public class Game implements Screen{
 		objects = new ArrayList<Object>();
 		remove = new ArrayList<Object>();
 		batch = new SpriteBatch();
-		field1 = new Field();
+		field1 = new Field(level);
 		objects.add(field1);
 		mario = new Mario(field1);
 		sound = Gdx.audio.newSound(Gdx.files.internal("essai01.wav"));
@@ -47,6 +50,12 @@ public class Game implements Screen{
 	
 	public static void kill() {
 		main.setScreen(new MainMenu(main));
+		sound.stop();
+		sound.dispose();
+	}
+	
+	public static void nextLevel() {
+		main.setScreen(new Game(main, 2));
 		sound.stop();
 		sound.dispose();
 	}
