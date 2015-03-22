@@ -66,7 +66,7 @@ public class Mario implements MoveableObject{
 	public Mario(Field field){
 		selected = 0;
 		lives = 3;
-		ammoGrenade = 10;
+		ammoGrenade = 0;
 		isCarryingTurret = null;
 		chestItems = new ArrayList<ChestItem>();
 		this.field = field;
@@ -74,7 +74,7 @@ public class Mario implements MoveableObject{
 		current_animation = 0;
 		stoneEnabled = true;
 		swordEnabled = false;
-		grenadeEnabled = true;
+		grenadeEnabled = false;
 		gunEnabled = false;
 		jetpackEnabled = false;
 		jump = false;
@@ -224,13 +224,24 @@ public class Mario implements MoveableObject{
 			if(selected == 0) {
 				Game.createStone(new Vector2(location.x+sprite.getWidth()/2, location.y+sprite.getHeight()/2), new Vector2(-10,5));
 			} else if(selected == 2) {
-				Game.createGrenade(new Vector2(location.x+sprite.getWidth()/2, location.y+sprite.getHeight()/2), new Vector2(-10,5));
+				if(ammoGrenade > 0){
+					ammoGrenade--;
+					Game.createGrenade(new Vector2(location.x+sprite.getWidth()/2, location.y+sprite.getHeight()/2), new Vector2(-10,5));
+				} else {
+					//TODO
+				}
+				
 			}
 		} else {
 			if(selected == 0) {
 				Game.createStone(new Vector2(location.x+sprite.getWidth()/2, location.y+sprite.getHeight()/2), new Vector2(10,5));
 			} else if(selected == 2) {
-				Game.createGrenade(new Vector2(location.x+sprite.getWidth()/2, location.y+sprite.getHeight()/2), new Vector2(10,5));
+				if(ammoGrenade > 0){
+					ammoGrenade--;
+					Game.createGrenade(new Vector2(location.x+sprite.getWidth()/2, location.y+sprite.getHeight()/2), new Vector2(10,5));
+				} else {
+					//TODO
+				}
 			}
 		}
 	}

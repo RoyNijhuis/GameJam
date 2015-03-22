@@ -1,5 +1,7 @@
 package nl.royenedwin.gamejam;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -52,6 +54,31 @@ public class Rocket implements MoveableObject {
 			mario.takeLive();
 			launcher.remove(this);
 		}
+		if(Field.fieldIsFull2((int)(position.x/32),(int)(position.y/32))){
+			launcher.remove(this);
+		}
+		ArrayList<Object>  obj= Game.getObjects();
+		for(Object t: obj){
+			if(t instanceof Grenade || t instanceof Stone){
+				if((int)(position.x/32) == (int)(((MoveableObject)t).getPosition().x/32) && (int)(position.y/32) == (int)((((MoveableObject)t).getPosition().y)/32)){
+					launcher.remove(this);
+					Game.removeObject(t);
+				} else if((int)((position.x+31)/32) == (int)(((MoveableObject)t).getPosition().x/32) && (int)(position.y/32) == (int)((((MoveableObject)t).getPosition().y)/32)){
+					launcher.remove(this);
+					Game.removeObject(t);
+				} else if((int)((position.x+31)/32) == (int)(((MoveableObject)t).getPosition().x/32) && (int)((position.y+63)/32) == (int)((((MoveableObject)t).getPosition().y)/32)){
+					launcher.remove(this);
+					Game.removeObject(t);
+				} else if((int)(position.x/32) == (int)(((MoveableObject)t).getPosition().x/32) && (int)(position.y+63/32) == (int)((((MoveableObject)t).getPosition().y)/32)){
+					launcher.remove(this);
+					Game.removeObject(t);
+				}
+			}
+		}
+		if(Field.fieldIsFull2((int)(position.x/32),(int)(position.y/32))){
+			launcher.remove(this);
+		}
+		
 	}
 
 	@Override
