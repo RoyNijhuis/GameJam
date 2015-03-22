@@ -23,7 +23,7 @@ public class Game implements Screen{
 	private static Sound sound;
 	private static ArrayList<Object> remove;
 	private static Main main;
-	private int level;
+	private static int level;
 	
 	public Game(Main main, int level) {
 		this.main = main;
@@ -55,7 +55,7 @@ public class Game implements Screen{
 	}
 	
 	public static void nextLevel() {
-		main.setScreen(new Game(main, 2));
+		main.setScreen(new Game(main, level+1));
 		sound.stop();
 		sound.dispose();
 	}

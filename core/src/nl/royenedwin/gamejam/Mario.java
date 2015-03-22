@@ -57,7 +57,7 @@ public class Mario implements MoveableObject{
 		speedHor = 10;
 		speedVer = 10;
 		maxSpeedHor = 500;
-		maxSpeedVer = 600;
+		maxSpeedVer = 2000;
 		speedHorNorm = 200;
 		speedVertNorm = 300;
 		horMult = 100;
@@ -183,8 +183,8 @@ public class Mario implements MoveableObject{
 				
 				location.y -= movement;
 				speedVer += vertMult*delta;
-				if(speedVer>speedVertNorm){
-					speedVer=speedVertNorm;
+				if(speedVer>maxSpeedVer){
+					speedVer=maxSpeedVer;
 				}
 			}
 		}
