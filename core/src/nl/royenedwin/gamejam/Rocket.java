@@ -2,6 +2,8 @@ package nl.royenedwin.gamejam;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,11 +18,13 @@ public class Rocket implements MoveableObject {
 	private float rotation;
 	private float rocketRotation;
 	private RocketLauncher launcher;
+	private Sound sound;
 	
 	public Rocket(RocketLauncher launcher, Mario mario, Vector2 position) {
 		this.position = position;
 		this.launcher = launcher;
 		this.mario = mario;
+		sound = Gdx.audio.newSound(Gdx.files.internal("bang.wav"));
 		rocketRotation = 0;
 		sprite.setOrigin(20, 50);
 	}
@@ -53,9 +57,11 @@ public class Rocket implements MoveableObject {
 		if((int)(position.x/32) == (int)(marioPos.x/32) && (int)(position.y/32) == (int)(marioPos.y/32)){
 			mario.takeLive();
 			launcher.remove(this);
+			sound.play();
 		}
 		if(Field.fieldIsFull2((int)(position.x/32),(int)(position.y/32))){
 			launcher.remove(this);
+			sound.play();
 		}
 		ArrayList<Object>  obj= Game.getObjects();
 		for(Object t: obj){
@@ -63,20 +69,25 @@ public class Rocket implements MoveableObject {
 				if((int)(position.x/32) == (int)(((MoveableObject)t).getPosition().x/32) && (int)(position.y/32) == (int)((((MoveableObject)t).getPosition().y)/32)){
 					launcher.remove(this);
 					Game.removeObject(t);
+					sound.play();
 				} else if((int)((position.x+31)/32) == (int)(((MoveableObject)t).getPosition().x/32) && (int)(position.y/32) == (int)((((MoveableObject)t).getPosition().y)/32)){
 					launcher.remove(this);
 					Game.removeObject(t);
+					sound.play();
 				} else if((int)((position.x+31)/32) == (int)(((MoveableObject)t).getPosition().x/32) && (int)((position.y+63)/32) == (int)((((MoveableObject)t).getPosition().y)/32)){
 					launcher.remove(this);
 					Game.removeObject(t);
+					sound.play();
 				} else if((int)(position.x/32) == (int)(((MoveableObject)t).getPosition().x/32) && (int)(position.y+63/32) == (int)((((MoveableObject)t).getPosition().y)/32)){
 					launcher.remove(this);
 					Game.removeObject(t);
+					sound.play();
 				}
 			}
 		}
 		if(Field.fieldIsFull2((int)(position.x/32),(int)(position.y/32))){
 			launcher.remove(this);
+			sound.play();
 		}
 		
 	}

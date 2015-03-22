@@ -427,6 +427,9 @@ public class Mario implements MoveableObject{
 	@Override
 	public void render(SpriteBatch batch) {
 		for(int i = 0; i<lives; i++){
+			if(i==5){
+				break;
+			}
 			batch.draw(heart, 10 + 74*i, 10, heart.getWidth()*Game.SCALING_FACTOR.x, heart.getHeight()*Game.SCALING_FACTOR.y);
 		}
 		int c = 0;
