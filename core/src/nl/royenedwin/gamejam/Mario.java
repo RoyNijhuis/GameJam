@@ -356,7 +356,7 @@ public class Mario implements MoveableObject{
 	public void takeLive(){
 		lives--;
 		if(lives==0) {
-			Game.kill();
+			Game.restart();
 		}
 	}
 	@Override
