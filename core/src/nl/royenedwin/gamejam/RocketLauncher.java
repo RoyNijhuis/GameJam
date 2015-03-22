@@ -39,7 +39,7 @@ public class RocketLauncher implements StaticObject, Updateable, Collidable {
 	public void update(float delta) {
 		deltaTime+=delta;
 		
-		if(deltaTime > 2) {
+		if(deltaTime > 4) {
 			//spawn rocket
 			rockets.add(new Rocket(this, Game.getMario(), new Vector2(position.x+0.5f*sprite.getWidth(), position.y+0.5f*sprite.getHeight())));
 			deltaTime = 0;

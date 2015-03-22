@@ -44,9 +44,9 @@ public class Rocket implements MoveableObject {
 		else if (relativeAngleToTarget < -Math.PI)
 		    relativeAngleToTarget += 2*Math.PI;
 		                 
-		rotation += relativeAngleToTarget;
-		position.x += Math.cos(rotation) * 200*delta;
-		position.y += Math.sin(rotation) * 200*delta;
+		rotation += relativeAngleToTarget*delta;
+		position.x += Math.cos(rotation) * 100*delta;
+		position.y += Math.sin(rotation) * 100*delta;
 		rocketRotation = rotation;
 		if((int)(position.x/32) == (int)(marioPos.x/32) && (int)(position.y/32) == (int)(marioPos.y/32)){
 			mario.takeLive();
