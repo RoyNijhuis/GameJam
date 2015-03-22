@@ -55,6 +55,7 @@ public class Explosion implements StaticObject, Updateable{
 				lastTexture = 5;
 			} else if(lastTexture == 5) {
 				//stop
+				
 			}
 		}
 	}

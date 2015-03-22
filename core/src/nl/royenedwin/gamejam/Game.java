@@ -103,6 +103,10 @@ public class Game implements Screen{
 	}
 	
 	public static void removeObject(Object o){
+		if(o instanceof Grenade) {
+			//laat explosie zien
+			Game.addExplosion(new Explosion(((Grenade) o).getPosition()));
+		}
 		remove.add(o);
 	}
 
