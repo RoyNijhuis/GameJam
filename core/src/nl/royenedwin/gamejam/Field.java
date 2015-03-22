@@ -76,6 +76,11 @@ public class Field implements Drawable, Updateable{
 					//Light blue => trampoline
 					fields[x][y] = new Trampoline();
 					collidingObjects.add((Collidable) fields[x][y]);
+				}  else if(color.r==1f && color.g==0.5647059f && color.b==0f) {
+					//Orange => portal1
+					fields[x][y] = new Portal(1);
+					fields[x][y-1] = new FullWalk();
+					collidingObjects.add((Collidable) fields[x][y]);
 				}  else if(color.r==1f && color.g==0f && color.b == 0.9411765f) {
 					//Pink => finish
 					fields[x][y] = new Finish();

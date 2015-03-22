@@ -297,6 +297,16 @@ public class Mario implements MoveableObject{
 		}
 	}
 	
+	public void teleport(Vector2 position, Portal source) {
+		for(Collidable c: field.getCollidingObjects()) {
+			if(c instanceof Portal) {
+				if(!c.equals(source) && ((Portal)c).getID() == source.getID()) {
+					location = new Vector2(((Portal) c).getPostition());
+				}
+			}
+		}
+	}
+	
 	public void takeLive(){
 		lives--;
 		if(lives==0) {
