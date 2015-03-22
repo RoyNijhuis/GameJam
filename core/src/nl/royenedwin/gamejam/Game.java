@@ -44,7 +44,7 @@ public class Game implements Screen{
 		objects.add(mario);
 		background = new Sprite(new Texture(BACKGROUND_PATH));
 		Gdx.input.setInputProcessor(new InputProcessor(mario));
-		objects.add(ghost = new Ghost(new Vector2(0,0), mario));
+		//objects.add(ghost = new Ghost(new Vector2(0,0), mario));
 		sound.loop();
 	}
 	
