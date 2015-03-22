@@ -5,14 +5,14 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
-public class Stone implements MoveableObject{
+public class Grenade implements MoveableObject{
 
-	public static final String TEXTURE_PATH = "cobblestone.png";
+	public static final String TEXTURE_PATH = "grenade.png";
 	private static Sprite sprite = new Sprite(new Texture(TEXTURE_PATH));
 	private Vector2 position;
 	private Vector2 velocity;
 	
-	public Stone(Vector2 position, Vector2 velocity) {
+	public Grenade(Vector2 position, Vector2 velocity) {
 		this.position = position;
 		this.velocity = velocity;
 	}

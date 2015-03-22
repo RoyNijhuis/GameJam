@@ -17,6 +17,7 @@ public class MainMenu implements Screen {
 	
 	public MainMenu(Main main) {
 		this.main = main;
+		System.out.println("test");
 	}
 	
 	@Override
