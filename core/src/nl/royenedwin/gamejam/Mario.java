@@ -26,10 +26,23 @@ public class Mario implements MoveableObject{
 	public static final String TEXTURE_PATH_WALK4 = "mario_4.png";
 	public static final String TEXTURE_PATH_WALK5 = "mario_5.png";
 	public static final String TEXTURE_PATH_WALK6 = "mario_6.png";
+
+	public static final String TEXTURE_ITEM_BAR = "itembar.png";
+	public static final String TEXTURE_STONE = "stone.png";
+	public static final String TEXTURE_SWORD = "sword.png";
+	public static final String TEXTURE_GRENADE2 = "grenade2.png";
+	public static final String TEXTURE_GUN = "gun.png";
+	public static final String TEXTURE_JETPACK = "jetpack.png";
 	private int current_animation;
 	private int walkedPixels;
 	private static Sprite heart = new Sprite(new Texture(TEXTURE_PATH_HEART));
 	private static Sprite sprite = new Sprite(new Texture(TEXTURE_PATH));
+	private static Sprite bar = new Sprite(new Texture(TEXTURE_ITEM_BAR));
+	private static Sprite stone = new Sprite(new Texture(TEXTURE_STONE));
+	private static Sprite sword = new Sprite(new Texture(TEXTURE_SWORD));
+	private static Sprite grenade2 = new Sprite(new Texture(TEXTURE_GRENADE2));
+	private static Sprite gun = new Sprite(new Texture(TEXTURE_GUN));
+	private static Sprite jetpack = new Sprite(new Texture(TEXTURE_JETPACK));
 	private float speedHor;
 	private float speedVer;
 	private float speedHorNorm;
@@ -42,6 +55,11 @@ public class Mario implements MoveableObject{
 	private Vector2 locationBlock;
 	private static ArrayList<ChestItem> chestItems;
 	private AutoTurret isCarryingTurret;
+	private boolean stoneEnabled;
+	private boolean swordEnabled;
+	private boolean grenadeEnabled;
+	private boolean gunEnabled;
+	private boolean jetpackEnabled;
 	
 	public Mario(Field field){
 		lives = 3;
@@ -50,6 +68,11 @@ public class Mario implements MoveableObject{
 		this.field = field;
 		walkedPixels = 0;
 		current_animation = 0;
+		stoneEnabled = true;
+		swordEnabled = true;
+		grenadeEnabled = true;
+		gunEnabled = true;
+		jetpackEnabled = true;
 		jump = false;
 		movingLeft = false;
 		movingRight = false;
@@ -387,7 +410,27 @@ public class Mario implements MoveableObject{
 		if(isCarryingTurret()) {
 			batch.draw(auto, getPositionPixels().x*Game.SCALING_FACTOR.x, getPositionPixels().y*Game.SCALING_FACTOR.y, auto.getWidth()*Game.SCALING_FACTOR.x, auto.getHeight()*Game.SCALING_FACTOR.y);
 		}
-
+		
+		batch.draw(bar, 400, 5, bar.getWidth()*Game.SCALING_FACTOR.x, bar.getHeight()*Game.SCALING_FACTOR.y);
+		batch.draw(stone, 400 + 18*Game.SCALING_FACTOR.x, 5+ 11*Game.SCALING_FACTOR.y, stone.getWidth()*Game.SCALING_FACTOR.x, stone.getHeight()*Game.SCALING_FACTOR.y);
+		if(swordEnabled){
+			batch.draw(sword, 400+97*Game.SCALING_FACTOR.x, 5+ 11*Game.SCALING_FACTOR.y, sword.getWidth()*Game.SCALING_FACTOR.x, sword.getHeight()*Game.SCALING_FACTOR.y);
+			
+		}
+		if(grenadeEnabled){
+			batch.draw(grenade2, 400+179*Game.SCALING_FACTOR.x, 5+ 11*Game.SCALING_FACTOR.y, grenade2.getWidth()*Game.SCALING_FACTOR.x, grenade2.getHeight()*Game.SCALING_FACTOR.y);
+			
+		}
+		if(gunEnabled){
+			batch.draw(gun, 400+ 261*Game.SCALING_FACTOR.x, 5+ 11*Game.SCALING_FACTOR.y, gun.getWidth()*Game.SCALING_FACTOR.x, gun.getHeight()*Game.SCALING_FACTOR.y);
+			
+		}
+		if(jetpackEnabled){
+			batch.draw(jetpack, 400+342*Game.SCALING_FACTOR.x, 5+ 11*Game.SCALING_FACTOR.y, jetpack.getWidth()*Game.SCALING_FACTOR.x, jetpack.getHeight()*Game.SCALING_FACTOR.y);
+			
+		}	
+		
+		
 		if(lastFacedDirectionIsLeft) {
 			if(!sprite.isFlipX()) {
 				sprite.flip(true, false);
