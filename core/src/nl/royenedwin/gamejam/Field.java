@@ -177,6 +177,12 @@ public class Field implements Drawable, Updateable{
 		return result;
 	}
 	
+	public static boolean fieldIsEmpty(int x, int y) {
+		
+		StaticObject o = fields[x][33-y];
+		return o == null;
+	}
+	
 	public boolean fieldIsFull(int x, int y) {
 		
 		boolean result = false;
