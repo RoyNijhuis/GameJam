@@ -41,9 +41,11 @@ public class Mario implements MoveableObject{
 	private boolean lastFacedDirectionIsLeft;
 	private Vector2 locationBlock;
 	private static ArrayList<ChestItem> chestItems;
+	private AutoTurret isCarryingTurret;
 	
 	public Mario(Field field){
 		lives = 3;
+		isCarryingTurret = null;
 		chestItems = new ArrayList<ChestItem>();
 		this.field = field;
 		walkedPixels = 0;
@@ -65,6 +67,38 @@ public class Mario implements MoveableObject{
 		location = new Vector2(100,500);
 		lastFacedDirectionIsLeft = false;
 		locationBlock = new Vector2((int)location.x/32, (int)location.y/32);
+	}
+	
+	public void carryTurret(AutoTurret turret) {
+		isCarryingTurret = turret;
+		turret.pickup();
+	}
+	
+	public void carryKeyPressed() {
+		if(isCarryingTurret == null) {
+			ArrayList<Collidable> set = field.getCollidingObjects();
+			
+			Vector2 v2 =new Vector2(location.x+64,location.y);
+			Vector2 v3 =new Vector2(location.x-32,location.y);
+			for(Collidable x: set){
+				if(x instanceof AutoTurret) {
+					Vector2 pos = ((AutoTurret)x).getPostition();
+					if((int)(location.x/32) == (int)(pos.x/32) && (int)(location.y/32) == (int)(pos.y/32)){
+						carryTurret((AutoTurret)x);
+					} else if((int)(v2.x/32) == (int)(pos.x/32) && (int)(v2.y/32) == (int)(pos.y/32)){
+						carryTurret((AutoTurret)x);
+					} else if((int)(v3.x/32) == (int)(pos.x/32) && (int)(v3.y/32) == (int)(pos.y/32)){
+						carryTurret((AutoTurret)x);
+					}
+				}
+			}
+		} else {
+			
+		}
+	}
+	
+	public boolean isCarryingTurret() {
+		return isCarryingTurret != null;
 	}
 	
 	public static void addChestItem(ChestItem item) {

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.PixmapIO;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -13,10 +12,12 @@ public class Field implements Drawable, Updateable{
 
 	private static StaticObject[][] fields;
 	private ArrayList<Collidable> collidingObjects;
+	private ArrayList<Updateable> updateableObjects;
 	
 	public Field(int level) {
 		Texture level1 = new Texture("level"+level+".png");
 		collidingObjects = new ArrayList<Collidable>();
+		updateableObjects = new ArrayList<Updateable>();
 		fields = new StaticObject[level1.getWidth()][level1.getHeight()];
 		level1.getTextureData().prepare();
 		Pixmap tmp = level1.getTextureData().consumePixmap();
@@ -92,6 +93,7 @@ public class Field implements Drawable, Updateable{
 					//Brown => autoturret
 					fields[x][y] = new AutoTurret();
 					collidingObjects.add((Collidable) fields[x][y]);
+					updateableObjects.add((Updateable)fields[x][y]);
 					fields[x][y-1] = new FullWalk();
 					fields[x+1][y-1] = new FullWalk();
 					fields[x+1][y] = new FullWalk();
@@ -200,7 +202,9 @@ public class Field implements Drawable, Updateable{
 
 	@Override
 	public void update(float delta) {
-		
+		for(Updateable u: updateableObjects) {
+			u.update(delta);
+		}
 	}
 
 	@Override
