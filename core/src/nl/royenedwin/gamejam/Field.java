@@ -14,8 +14,8 @@ public class Field implements Drawable, Updateable{
 	private static StaticObject[][] fields;
 	private ArrayList<Collidable> collidingObjects;
 	
-	public Field() {
-		Texture level1 = new Texture("level1.png");
+	public Field(int level) {
+		Texture level1 = new Texture("level"+level+".png");
 		collidingObjects = new ArrayList<Collidable>();
 		fields = new StaticObject[level1.getWidth()][level1.getHeight()];
 		level1.getTextureData().prepare();
@@ -81,6 +81,13 @@ public class Field implements Drawable, Updateable{
 					fields[x][y] = new Portal(1);
 					fields[x][y-1] = new FullWalk();
 					collidingObjects.add((Collidable) fields[x][y]);
+				}  else if(color.r==1f && color.g==0f && color.b == 0.9411765f) {
+					//Pink => finish
+					fields[x][y] = new Finish();
+					collidingObjects.add((Collidable) fields[x][y]);
+					fields[x+1][y] = new FullWalk();
+					fields[x][y-1] = new FullWalk();
+					fields[x+1][y-1] = new FullWalk();
 				}
 				else {
 					if(!(fields[x][y] instanceof FullWalk) && !(fields[x][y] instanceof FullNotWalk)) {
