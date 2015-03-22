@@ -13,6 +13,7 @@ public class Field implements Drawable, Updateable{
 
 	private static StaticObject[][] fields;
 	private ArrayList<Collidable> collidingObjects;
+	private ArrayList<Updateable> updateableObjects;
 	
 	public Field(int level) {
 		Texture level1 = null;
@@ -30,6 +31,7 @@ public class Field implements Drawable, Updateable{
 		}
 		if(level1 != null){
 			collidingObjects = new ArrayList<Collidable>();
+			updateableObjects = new ArrayList<Updateable>();
 			fields = new StaticObject[level1.getWidth()][level1.getHeight()];
 			level1.getTextureData().prepare();
 			Pixmap tmp = level1.getTextureData().consumePixmap();
@@ -105,6 +107,7 @@ public class Field implements Drawable, Updateable{
 						//Brown => autoturret
 						fields[x][y] = new AutoTurret();
 						collidingObjects.add((Collidable) fields[x][y]);
+						updateableObjects.add((Updateable)fields[x][y]);
 						fields[x][y-1] = new FullWalk();
 						fields[x+1][y-1] = new FullWalk();
 						fields[x+1][y] = new FullWalk();
@@ -219,7 +222,9 @@ public class Field implements Drawable, Updateable{
 
 	@Override
 	public void update(float delta) {
-		
+		for(Updateable u: updateableObjects){
+			u.update(delta);
+		}
 	}
 
 	@Override

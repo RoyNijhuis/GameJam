@@ -21,6 +21,9 @@ public class InputProcessor extends InputAdapter {
 		if(keycode == Keys.W || keycode == Keys.UP) {
 			mario.inputUp();
 		}
+		if(keycode == Keys.E) {
+			mario.carryKeyPressed();
+		}
 		if(keycode == Keys.SPACE) {
 			mario.shoot();
 		}
