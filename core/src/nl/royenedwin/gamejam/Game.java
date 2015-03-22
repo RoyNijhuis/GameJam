@@ -57,6 +57,10 @@ public class Game implements Screen{
 		sound.loop();
 	}
 	
+	public static void addExplosion(Explosion e) {
+		objects.add(e);
+	}
+	
 	public static void kill() {
 		field1 = null;
 		//TODO draw screen

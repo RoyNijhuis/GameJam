@@ -32,6 +32,7 @@ public class RocketLauncher implements StaticObject, Updateable, Collidable {
 	}
 	
 	public void remove(Rocket rocket) {
+		Game.addExplosion(new Explosion(rocket.getPosition()));
 		toRemove.add(rocket);
 	}
 
