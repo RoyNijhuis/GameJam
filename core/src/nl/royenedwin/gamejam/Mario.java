@@ -61,7 +61,7 @@ public class Mario implements MoveableObject{
 		maxSpeedHor = 500;
 		maxSpeedVer = 2000;
 		speedHorNorm = 200;
-		speedVertNorm = 300;
+		speedVertNorm = 320;
 		horMult = 100;
 		vertMult = 360;
 		location = new Vector2(100,500);
