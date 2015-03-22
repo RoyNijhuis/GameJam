@@ -1,11 +1,13 @@
 package nl.royenedwin.gamejam;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
-public class Grenade implements MoveableObject{
+public class Grenade implements MoveableObject, RandomItem{
 
 	public static final String TEXTURE_PATH = "grenade.png";
 	private static Sprite sprite = new Sprite(new Texture(TEXTURE_PATH));
@@ -48,11 +50,41 @@ public class Grenade implements MoveableObject{
 				Game.removeObject(this);
 			}
 		}
+		
+		ArrayList<Collidable> set = Field.getCollidingObjects2();
+		Vector2 location = position;
+		Vector2 v2 =new Vector2(location.x+64,location.y);
+		Vector2 v4 =new Vector2(location.x+32,location.y);
+		Vector2 v3 =new Vector2(location.x-32,location.y);
+		for(Collidable x: set){
+			if(x instanceof AutoTurret) {
+				AutoTurret z = (AutoTurret) x;
+				if((int)(position.x/32) == (int)(z.getPosition().x/32) && (int)(position.y/32) == (int)(z.getPosition().y/32)){
+					z.hit();
+					Game.removeObject(this);
+				} else if((int)(position.x/32) == (int)(z.getPosition().x/32)+1 && (int)(position.y/32) == (int)(z.getPosition().y/32)){
+					z.hit();
+					Game.removeObject(this);
+				} else if((int)(position.x/32) == (int)(z.getPosition().x/32) && (int)(position.y/32) == (int)(z.getPosition().y/32)+1){
+					z.hit();
+					Game.removeObject(this);
+				} else if((int)(position.x/32) == (int)(z.getPosition().x/32)+1 && (int)(position.y/32) == (int)(z.getPosition().y/32)+1){
+					z.hit();
+					Game.removeObject(this);
+				}
+			}
+		}
 	}
 
 	@Override
 	public Vector2 getPosition() {
 		// TODO Auto-generated method stub
 		return position;
+	}
+
+	@Override
+	public Sprite getSprite() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

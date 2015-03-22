@@ -24,6 +24,21 @@ public class InputProcessor extends InputAdapter {
 		if(keycode == Keys.E) {
 			mario.carryKeyPressed();
 		}
+		if(keycode == Keys.NUMPAD_1 || keycode == Keys.NUM_1) {
+			mario.wapenKeyPressed(1);
+		}
+		if(keycode == Keys.NUMPAD_2 || keycode == Keys.NUM_2) {
+			mario.wapenKeyPressed(2);
+		}
+		if(keycode == Keys.NUMPAD_3 || keycode == Keys.NUM_3) {
+			mario.wapenKeyPressed(3);
+		}
+		if(keycode == Keys.NUMPAD_4 || keycode == Keys.NUM_4) {
+			mario.wapenKeyPressed(4);
+		}
+		if(keycode == Keys.NUMPAD_5 || keycode == Keys.NUM_5) {
+			mario.wapenKeyPressed(5);
+		}
 		if(keycode == Keys.SPACE) {
 			mario.shoot();
 		}

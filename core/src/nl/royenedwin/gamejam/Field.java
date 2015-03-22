@@ -12,7 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Field implements Drawable, Updateable{
 
 	private static StaticObject[][] fields;
-	private ArrayList<Collidable> collidingObjects;
+	private static ArrayList<Collidable> collidingObjects;
 	private ArrayList<Updateable> updateableObjects;
 	
 	public Field(int level) {
@@ -26,7 +26,7 @@ public class Field implements Drawable, Updateable{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			System.out.println("hi");
+			
 			Game.kill();
 		}
 		if(level1 != null){
@@ -38,7 +38,7 @@ public class Field implements Drawable, Updateable{
 			for(int x=0;x<60;x++) {
 				for(int y=0;y<34;y++) {
 					Color color = new Color(tmp.getPixel(x, y));
-					System.out.println(color.r + " " + color.g + " " + color.b);
+					//System.out.println(color.r + " " + color.g + " " + color.b);
 					if(tmp.getPixel(x, y) == 255) {
 						fields[x][y] = new Block();
 					} else if(color.r==0.011764706f && color.g==0.5529412f && color.b == 0f) {
@@ -145,6 +145,10 @@ public class Field implements Drawable, Updateable{
 	}
 	
 	public ArrayList<Collidable> getCollidingObjects() {
+		return collidingObjects;
+	}
+	
+	public static ArrayList<Collidable> getCollidingObjects2() {
 		return collidingObjects;
 	}
 	

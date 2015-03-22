@@ -88,6 +88,10 @@ public class Game implements Screen{
 		objects.add(new Stone(position, velocity));
 	}
 	
+	public static void createGrenade(Vector2 position, Vector2 velocity) {
+		objects.add(new Grenade(position, velocity));
+	}
+	
 	public static ArrayList<Object> getObjects() {
 		return objects;
 	}
@@ -154,7 +158,7 @@ public class Game implements Screen{
 		if(level==2 || level ==3) {
 			g = true;
 		}
-		main.setScreen(new Game(main, level+1, g));
+		main.setScreen(new Game(main, level, g));
 		sound.stop();
 		sound.dispose();
 	}

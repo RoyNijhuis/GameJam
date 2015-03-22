@@ -58,21 +58,25 @@ public class Mario implements MoveableObject{
 	private boolean stoneEnabled;
 	private boolean swordEnabled;
 	private boolean grenadeEnabled;
+	private int ammoGrenade;
 	private boolean gunEnabled;
 	private boolean jetpackEnabled;
+	private int selected;
 	
 	public Mario(Field field){
+		selected = 0;
 		lives = 3;
+		ammoGrenade = 10;
 		isCarryingTurret = null;
 		chestItems = new ArrayList<ChestItem>();
 		this.field = field;
 		walkedPixels = 0;
 		current_animation = 0;
 		stoneEnabled = true;
-		swordEnabled = true;
+		swordEnabled = false;
 		grenadeEnabled = true;
-		gunEnabled = true;
-		jetpackEnabled = true;
+		gunEnabled = false;
+		jetpackEnabled = false;
 		jump = false;
 		movingLeft = false;
 		movingRight = false;
@@ -90,6 +94,11 @@ public class Mario implements MoveableObject{
 		location = new Vector2(100,500);
 		lastFacedDirectionIsLeft = false;
 		locationBlock = new Vector2((int)location.x/32, (int)location.y/32);
+	}
+	
+	public void addGrenade(){
+		grenadeEnabled = true;
+		ammoGrenade += 5;
 	}
 	
 	public void carryTurret(AutoTurret turret) {
@@ -212,9 +221,17 @@ public class Mario implements MoveableObject{
 	
 	public void shoot() {
 		if(lastFacedDirectionIsLeft) {
-			Game.createStone(new Vector2(location.x+sprite.getWidth()/2, location.y+sprite.getHeight()/2), new Vector2(-10,5));
+			if(selected == 0) {
+				Game.createStone(new Vector2(location.x+sprite.getWidth()/2, location.y+sprite.getHeight()/2), new Vector2(-10,5));
+			} else if(selected == 2) {
+				Game.createGrenade(new Vector2(location.x+sprite.getWidth()/2, location.y+sprite.getHeight()/2), new Vector2(-10,5));
+			}
 		} else {
-			Game.createStone(new Vector2(location.x+sprite.getWidth()/2, location.y+sprite.getHeight()/2), new Vector2(10,5));
+			if(selected == 0) {
+				Game.createStone(new Vector2(location.x+sprite.getWidth()/2, location.y+sprite.getHeight()/2), new Vector2(10,5));
+			} else if(selected == 2) {
+				Game.createGrenade(new Vector2(location.x+sprite.getWidth()/2, location.y+sprite.getHeight()/2), new Vector2(10,5));
+			}
 		}
 	}
 	
@@ -452,6 +469,21 @@ public class Mario implements MoveableObject{
 
 	public void addLive() {
 		lives++;
+		
+	}
+
+	public void wapenKeyPressed(int i) {
+		if(i == 1 && stoneEnabled){
+			selected = 0;
+		} else if(i == 2 && swordEnabled){
+			selected = 1;
+		} else if(i == 3 && grenadeEnabled){
+			selected = 2;
+		} else if(i == 4 && gunEnabled){
+			selected = 3;
+		} else if(i == 5 && jetpackEnabled){
+			selected = 4;
+		}
 		
 	}
 	

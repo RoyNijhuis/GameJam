@@ -1,5 +1,7 @@
 package nl.royenedwin.gamejam;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -46,6 +48,29 @@ public class Stone implements MoveableObject{
 			} else if((int)(position.x/32) == (int)(ghost.getPosition().x/32)+1 && (int)(position.y/32) == (int)(ghost.getPosition().y/32)+1){
 				ghost.hit();
 				Game.removeObject(this);
+			}
+		}
+		ArrayList<Collidable> set = Field.getCollidingObjects2();
+		Vector2 location = position;
+		Vector2 v2 =new Vector2(location.x+64,location.y);
+		Vector2 v4 =new Vector2(location.x+32,location.y);
+		Vector2 v3 =new Vector2(location.x-32,location.y);
+		for(Collidable x: set){
+			if(x instanceof AutoTurret) {
+				AutoTurret z = (AutoTurret) x;
+				if((int)(position.x/32) == (int)(z.getPosition().x/32) && (int)(position.y/32) == (int)(z.getPosition().y/32)){
+					z.hit();
+					Game.removeObject(this);
+				} else if((int)(position.x/32) == (int)(z.getPosition().x/32)+1 && (int)(position.y/32) == (int)(z.getPosition().y/32)){
+					z.hit();
+					Game.removeObject(this);
+				} else if((int)(position.x/32) == (int)(z.getPosition().x/32) && (int)(position.y/32) == (int)(z.getPosition().y/32)+1){
+					z.hit();
+					Game.removeObject(this);
+				} else if((int)(position.x/32) == (int)(z.getPosition().x/32)+1 && (int)(position.y/32) == (int)(z.getPosition().y/32)+1){
+					z.hit();
+					Game.removeObject(this);
+				}
 			}
 		}
 	}

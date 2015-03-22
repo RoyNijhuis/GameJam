@@ -16,67 +16,80 @@ public class AutoTurret implements StaticObject, Collidable, Updateable{
 	private float deltaTime;
 	private Mario pickedUp;
 	private boolean facingLeft;
+	private boolean disabled;
+	private float disableTime;
 	
 	public AutoTurret(boolean facingLeft) {
+		disabled = false;
 		this.facingLeft = facingLeft;
 		sprite = new Sprite(new Texture(TEXTURE_PATH));
 		laserSprite = new Sprite(new Texture(LASER_PATH));
 		endLaserX=0;
 		deltaTime=0;
+		disableTime = 0;
 	}
 
 	public void render(SpriteBatch batch) {
-		if(pickedUp == null) {
-			if(facingLeft) {
-				if(!sprite.isFlipX()) {
-					sprite.flip(true, false);
+		
+		if(!disabled){
+			if(pickedUp == null) {
+				if(facingLeft) {
+					if(!sprite.isFlipX()) {
+						sprite.flip(true, false);
+					}
+				} else {
+					if(sprite.isFlipX()) {
+						sprite.flip(true, false);
+					}
 				}
-			} else {
-				if(sprite.isFlipX()) {
-					sprite.flip(true, false);
-				}
-			}
-			
-			batch.draw(sprite, position.x*Game.SCALING_FACTOR.x, position.y*Game.SCALING_FACTOR.y, sprite.getWidth()*Game.SCALING_FACTOR.x, sprite.getHeight()*Game.SCALING_FACTOR.y);
-			int x = (int)(position.x/32);
-			int y = (int)(position.y/32)+1;
-			
-			if(!facingLeft) {
-				for(int currentX=x+1; currentX<60; currentX++) {
-					if(!Field.fieldIsFull2(currentX, y)) {
-						//niet vol, draw laser
-						if(currentX == x+1) {
-							batch.draw(laserSprite, (currentX*32+16)*Game.SCALING_FACTOR.x, (position.y+37)*Game.SCALING_FACTOR.y, (laserSprite.getWidth()*Game.SCALING_FACTOR.x)/2f, laserSprite.getHeight()*Game.SCALING_FACTOR.y);
+				
+				batch.draw(sprite, position.x*Game.SCALING_FACTOR.x, position.y*Game.SCALING_FACTOR.y, sprite.getWidth()*Game.SCALING_FACTOR.x, sprite.getHeight()*Game.SCALING_FACTOR.y);
+				int x = (int)(position.x/32);
+				int y = (int)(position.y/32)+1;
+				
+				if(!facingLeft) {
+					for(int currentX=x+1; currentX<60; currentX++) {
+						if(!Field.fieldIsFull2(currentX, y)) {
+							//niet vol, draw laser
+							if(currentX == x+1) {
+								batch.draw(laserSprite, (currentX*32+16)*Game.SCALING_FACTOR.x, (position.y+37)*Game.SCALING_FACTOR.y, (laserSprite.getWidth()*Game.SCALING_FACTOR.x)/2f, laserSprite.getHeight()*Game.SCALING_FACTOR.y);
+							} else {
+								batch.draw(laserSprite, (currentX*32)*Game.SCALING_FACTOR.x, (position.y+37)*Game.SCALING_FACTOR.y, laserSprite.getWidth()*Game.SCALING_FACTOR.x, laserSprite.getHeight()*Game.SCALING_FACTOR.y);
+							}
+							
 						} else {
-							batch.draw(laserSprite, (currentX*32)*Game.SCALING_FACTOR.x, (position.y+37)*Game.SCALING_FACTOR.y, laserSprite.getWidth()*Game.SCALING_FACTOR.x, laserSprite.getHeight()*Game.SCALING_FACTOR.y);
+							//vol, stop laser
+							endLaserX = currentX-1;
+							break;
 						}
-						
-					} else {
-						//vol, stop laser
-						endLaserX = currentX-1;
-						break;
+					}
+				} else {
+					System.out.println("here");
+					for(int currentX=x; currentX>=0; currentX--) {
+						if(!Field.fieldIsFull2(currentX, y)) {
+							//niet vol, draw laser
+							if(currentX == x) {
+								batch.draw(laserSprite, (currentX*32)*Game.SCALING_FACTOR.x, (position.y+37)*Game.SCALING_FACTOR.y, (laserSprite.getWidth()*Game.SCALING_FACTOR.x)/2f, laserSprite.getHeight()*Game.SCALING_FACTOR.y);
+							} else {
+								batch.draw(laserSprite, (currentX*32)*Game.SCALING_FACTOR.x, (position.y+37)*Game.SCALING_FACTOR.y, laserSprite.getWidth()*Game.SCALING_FACTOR.x, laserSprite.getHeight()*Game.SCALING_FACTOR.y);
+							}
+							System.out.println("going on");
+							
+						} else {
+							System.out.println("stopped");
+							//vol, stop laser
+							endLaserX = currentX+1;
+							break;
+						}
 					}
 				}
 			} else {
-				for(int currentX=x; currentX>0; currentX--) {
-					if(!Field.fieldIsFull2(currentX, y)) {
-						//niet vol, draw laser
-						if(currentX == x) {
-							batch.draw(laserSprite, (currentX*32)*Game.SCALING_FACTOR.x, (position.y+37)*Game.SCALING_FACTOR.y, (laserSprite.getWidth()*Game.SCALING_FACTOR.x)/2f, laserSprite.getHeight()*Game.SCALING_FACTOR.y);
-						} else {
-							batch.draw(laserSprite, (currentX*32)*Game.SCALING_FACTOR.x, (position.y+37)*Game.SCALING_FACTOR.y, laserSprite.getWidth()*Game.SCALING_FACTOR.x, laserSprite.getHeight()*Game.SCALING_FACTOR.y);
-						}
-						
-					} else {
-						//vol, stop laser
-						endLaserX = currentX+1;
-						break;
-					}
-				}
+				
+				//batch.draw(sprite, pickedUp.getPositionPixels().x*Game.SCALING_FACTOR.x, pickedUp.getPositionPixels().y*Game.SCALING_FACTOR.y, sprite.getWidth()*Game.SCALING_FACTOR.x, sprite.getHeight()*Game.SCALING_FACTOR.y);
 			}
 		} else {
+			batch.draw(sprite, position.x*Game.SCALING_FACTOR.x, position.y*Game.SCALING_FACTOR.y, sprite.getWidth()*Game.SCALING_FACTOR.x, sprite.getHeight()*Game.SCALING_FACTOR.y);
 			
-			//batch.draw(sprite, pickedUp.getPositionPixels().x*Game.SCALING_FACTOR.x, pickedUp.getPositionPixels().y*Game.SCALING_FACTOR.y, sprite.getWidth()*Game.SCALING_FACTOR.x, sprite.getHeight()*Game.SCALING_FACTOR.y);
 		}
 	}
 	
@@ -111,28 +124,36 @@ public class AutoTurret implements StaticObject, Collidable, Updateable{
 		int x = (int)(position.x/32);
 		int y = (int)(position.y/32)+1;
 		StaticObject[][] fields = Field.getFields();
-		
-		if(pickedUp == null) {
-			if(!facingLeft) {
-				if(posMario.y == y || posMario.y+1 == y) {
-					if(posMario.x>x+1 && posMario.x<=endLaserX) {
-						//collision with laser or turret
-						if(deltaTime>1) {
-							Game.getMario().takeLive();
-							deltaTime=0;
+		if(!disabled){
+			if(pickedUp == null) {
+				if(!facingLeft) {
+					if(posMario.y == y || posMario.y+1 == y) {
+						if(posMario.x>x+1 && posMario.x<=endLaserX) {
+							//collision with laser or turret
+							if(deltaTime>1) {
+								Game.getMario().takeLive();
+								deltaTime=0;
+							}
+						}
+					}
+				} else {
+					if(posMario.y == y || posMario.y+1 == y) {
+						if(posMario.x<x && posMario.x>=endLaserX) {
+							//collision with laser or turret
+							if(deltaTime>1) {
+								Game.getMario().takeLive();
+								deltaTime=0;
+							}
 						}
 					}
 				}
-			} else {
-				if(posMario.y == y || posMario.y+1 == y) {
-					if(posMario.x<x && posMario.x>=endLaserX) {
-						//collision with laser or turret
-						if(deltaTime>1) {
-							Game.getMario().takeLive();
-							deltaTime=0;
-						}
-					}
-				}
+			}
+		} else {
+			System.out.println(disableTime);
+			disableTime -= delta;
+			if(disableTime<=0){
+				disabled = false;
+				disableTime = 0;
 			}
 		}
 	}
@@ -140,5 +161,10 @@ public class AutoTurret implements StaticObject, Collidable, Updateable{
 	@Override
 	public Vector2 getPosition() {
 		return position;
+	}
+
+	public void hit() {
+		disabled = true;
+		disableTime = 5;
 	}
 }
