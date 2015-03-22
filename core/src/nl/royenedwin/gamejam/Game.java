@@ -154,7 +154,7 @@ public class Game implements Screen{
 		if(level==2 || level ==3) {
 			g = true;
 		}
-		main.setScreen(new Game(main, level+1, g));
+		main.setScreen(new Game(main, level, g));
 		sound.stop();
 		sound.dispose();
 	}
