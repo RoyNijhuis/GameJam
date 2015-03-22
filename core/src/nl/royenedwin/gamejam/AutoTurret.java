@@ -169,6 +169,8 @@ public class AutoTurret implements StaticObject, Collidable, Updateable{
 	}
 	
 	public void hit2() {
+		Game.addExplosion(new Explosion(position));
+		Game.addExplosion(new Explosion(new Vector2(position.x, position.y-32)));
 		Field.setField(new Vector2((int)(position.x/32), 33-(int)(position.y/32)), null);
 	}
 }
