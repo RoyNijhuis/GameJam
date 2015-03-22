@@ -44,7 +44,7 @@ public class Chest implements StaticObject, Collidable {
 				if(i <= 49){
 					Game.getMario().addLive();
 				} else {
-					//TODO grenade
+					Game.getMario().addGrenade();
 				}
 			} else{
 				Mario.addChestItem(item);
