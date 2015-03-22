@@ -14,9 +14,11 @@ public class Field implements Drawable, Updateable{
 	private static StaticObject[][] fields;
 	private static ArrayList<Collidable> collidingObjects;
 	private ArrayList<Updateable> updateableObjects;
+	private static ArrayList<Object> toDelete;
 	
 	public Field(int level) {
 		Texture level1 = null;
+		toDelete = new ArrayList<Object>();
 		try{
 			level1 = new Texture("level"+level+".png");
 		} catch (Exception e){
@@ -151,6 +153,7 @@ public class Field implements Drawable, Updateable{
 	}
 	
 	public static void removeObjectFromField(Object o) {
+		removeFromAllLists(o);
 		for(int x=0;x<60;x++) {
 			for(int y=0;y<34;y++) {
 				if(fields[x][y]!=null && fields[x][y].equals(o)) {
@@ -158,6 +161,10 @@ public class Field implements Drawable, Updateable{
 				}
 			}
 		}
+	}
+	
+	public static void removeFromAllLists(Object o) {
+		toDelete.add(o);
 	}
 	
 	public ArrayList<Collidable> getCollidingObjects() {
@@ -259,6 +266,12 @@ public class Field implements Drawable, Updateable{
 		for(Updateable u: updateableObjects){
 			u.update(delta);
 		}
+		
+		for(Object o: toDelete) {
+			updateableObjects.remove(o);
+			collidingObjects.remove(o);
+		}
+		toDelete = new ArrayList<Object>();
 	}
 
 	@Override
