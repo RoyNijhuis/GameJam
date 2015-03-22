@@ -74,11 +74,16 @@ public class Mario implements MoveableObject{
 		turret.pickup();
 	}
 	
+	public boolean lastFacedDirectionIsLeft() {
+		return lastFacedDirectionIsLeft;
+	}
+	
 	public void carryKeyPressed() {
 		if(isCarryingTurret == null) {
 			ArrayList<Collidable> set = field.getCollidingObjects();
 			
 			Vector2 v2 =new Vector2(location.x+64,location.y);
+			Vector2 v4 =new Vector2(location.x+32,location.y);
 			Vector2 v3 =new Vector2(location.x-32,location.y);
 			for(Collidable x: set){
 				if(x instanceof AutoTurret) {
@@ -88,6 +93,8 @@ public class Mario implements MoveableObject{
 					} else if((int)(v2.x/32) == (int)(pos.x/32) && (int)(v2.y/32) == (int)(pos.y/32)){
 						carryTurret((AutoTurret)x);
 					} else if((int)(v3.x/32) == (int)(pos.x/32) && (int)(v3.y/32) == (int)(pos.y/32)){
+						carryTurret((AutoTurret)x);
+					} else if((int)(v4.x/32) == (int)(pos.x/32) && (int)(v4.y/32) == (int)(pos.y/32)){
 						carryTurret((AutoTurret)x);
 					}
 				}

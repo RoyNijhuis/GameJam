@@ -105,7 +105,7 @@ public class Field implements Drawable, Updateable{
 						fields[x+1][y-1] = new FullWalk();
 					}  else if(color.r==0.39215687f && color.g==0.21960784f && color.b == 0f) {
 						//Brown => autoturret
-						fields[x][y] = new AutoTurret();
+						fields[x][y] = new AutoTurret(false);
 						collidingObjects.add((Collidable) fields[x][y]);
 						updateableObjects.add((Updateable)fields[x][y]);
 						fields[x][y-1] = new FullWalk();
