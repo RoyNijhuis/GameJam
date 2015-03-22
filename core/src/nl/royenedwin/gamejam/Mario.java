@@ -2,7 +2,9 @@ package nl.royenedwin.gamejam;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -26,6 +28,7 @@ public class Mario implements MoveableObject{
 	public static final String TEXTURE_PATH_WALK4 = "mario_4.png";
 	public static final String TEXTURE_PATH_WALK5 = "mario_5.png";
 	public static final String TEXTURE_PATH_WALK6 = "mario_6.png";
+	
 
 	public static final String TEXTURE_ITEM_BAR = "itembar.png";
 	public static final String TEXTURE_STONE = "stone.png";
@@ -59,14 +62,20 @@ public class Mario implements MoveableObject{
 	private boolean swordEnabled;
 	private boolean grenadeEnabled;
 	private int ammoGrenade;
+	private int ammoGun;
+	private int ammoJet;
 	private boolean gunEnabled;
 	private boolean jetpackEnabled;
 	private int selected;
+	private BitmapFont font;
 	
 	public Mario(Field field){
+		font = new BitmapFont(Gdx.files.internal("fonts/font.fnt"));
 		selected = 0;
 		lives = 3;
 		ammoGrenade = 0;
+		ammoGun = 0;
+		ammoJet = 0;
 		isCarryingTurret = null;
 		chestItems = new ArrayList<ChestItem>();
 		this.field = field;
@@ -450,7 +459,6 @@ public class Mario implements MoveableObject{
 		}
 		if(grenadeEnabled){
 			batch.draw(grenade2, 400+179*Game.SCALING_FACTOR.x, 5+ 11*Game.SCALING_FACTOR.y, grenade2.getWidth()*Game.SCALING_FACTOR.x, grenade2.getHeight()*Game.SCALING_FACTOR.y);
-			
 		}
 		if(gunEnabled){
 			batch.draw(gun, 400+ 261*Game.SCALING_FACTOR.x, 5+ 11*Game.SCALING_FACTOR.y, gun.getWidth()*Game.SCALING_FACTOR.x, gun.getHeight()*Game.SCALING_FACTOR.y);
@@ -460,6 +468,19 @@ public class Mario implements MoveableObject{
 			batch.draw(jetpack, 400+342*Game.SCALING_FACTOR.x, 5+ 11*Game.SCALING_FACTOR.y, jetpack.getWidth()*Game.SCALING_FACTOR.x, jetpack.getHeight()*Game.SCALING_FACTOR.y);
 			
 		}	
+		
+		if(selected == 0){
+			font.draw(batch, "-", 400+ 540*Game.SCALING_FACTOR.x, 5+ 45*Game.SCALING_FACTOR.y);
+		} else if(selected == 1){
+			font.draw(batch, "-", 400+ 540*Game.SCALING_FACTOR.x, 5+ 45*Game.SCALING_FACTOR.y);
+		} else if(selected == 2){
+			font.draw(batch, ""+ammoGrenade, 400+ 540*Game.SCALING_FACTOR.x, 5+ 45*Game.SCALING_FACTOR.y);
+		} else if(selected == 3){
+			font.draw(batch, ""+ammoGun, 400+ 540*Game.SCALING_FACTOR.x, 5+ 45*Game.SCALING_FACTOR.y);
+		} else if(selected == 4){
+			font.draw(batch, ""+ammoJet, 400+ 540*Game.SCALING_FACTOR.x, 5+ 45*Game.SCALING_FACTOR.y);
+		}
+		
 		
 		
 		if(lastFacedDirectionIsLeft) {
