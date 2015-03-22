@@ -99,7 +99,6 @@ public class Grenade implements MoveableObject, RandomItem{
 		for(Collidable x: set){
 			if(x instanceof Mine) {
 				Mine p = (Mine) x;
-				System.out.println(p.getPosition());
 				if(p.getPosition()!=null && (int)(position.x/32) == (int)(p.getPosition().x/32) && (int)(position.y/32) == (int)(p.getPosition().y/32)){
 					p.hit2();
 					Game.removeObject(this);

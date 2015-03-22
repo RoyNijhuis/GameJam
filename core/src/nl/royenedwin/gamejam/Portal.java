@@ -24,7 +24,6 @@ public class Portal implements StaticObject, Collidable {
 			sprite = new Sprite(new Texture(PORTAL2_PATH));
 			break;
 		default: 
-			System.out.println("ERROR ERROR ERROR");
 			break;
 		}
 	}

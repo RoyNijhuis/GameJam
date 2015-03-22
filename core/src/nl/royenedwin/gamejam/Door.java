@@ -35,7 +35,6 @@ public class Door implements StaticObject, Collidable{
 			closedSprite = new Sprite(new Texture(TEXTURE_PATH_CLOSED4));
 			break;
 		default: 
-			System.out.println("ERROR ERROR ERROR");
 			break;
 		}
 	}

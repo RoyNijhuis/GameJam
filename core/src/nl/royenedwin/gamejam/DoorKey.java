@@ -27,7 +27,6 @@ public class DoorKey implements ChestItem {
 			sprite = new Sprite(new Texture(KEY4_PATH));
 			break;
 		default: 
-			System.out.println("ERROR ERROR ERROR");
 			break;
 		}
 	}

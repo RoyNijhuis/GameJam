@@ -31,7 +31,6 @@ public class Game implements Screen{
 	public Game(Main main, int level, boolean spawnGhost) {
 		this.main = main;
 		this.level = level;
-		System.out.println("level " + level);
 		this.spawnGhost = spawnGhost;
 	}
 	
@@ -61,6 +60,10 @@ public class Game implements Screen{
 	
 	public static void addExplosion(Explosion e) {
 		explosions.add(e);
+	}
+	
+	public static void removeExplosion(Explosion e) {
+		remove.add(e);
 	}
 	
 	public static void kill() {
@@ -160,6 +163,7 @@ public class Game implements Screen{
 		}
 		for(Object o: remove){
 			objects.remove(o);
+			explosions.remove(o);
 		}
 		remove.clear();
 		batch.end();

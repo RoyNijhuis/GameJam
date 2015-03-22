@@ -64,7 +64,6 @@ public class AutoTurret implements StaticObject, Collidable, Updateable{
 						}
 					}
 				} else {
-					System.out.println("here");
 					for(int currentX=x; currentX>=0; currentX--) {
 						if(!Field.fieldIsFull2(currentX, y)) {
 							//niet vol, draw laser
@@ -73,10 +72,8 @@ public class AutoTurret implements StaticObject, Collidable, Updateable{
 							} else {
 								batch.draw(laserSprite, (currentX*32)*Game.SCALING_FACTOR.x, (position.y+37)*Game.SCALING_FACTOR.y, laserSprite.getWidth()*Game.SCALING_FACTOR.x, laserSprite.getHeight()*Game.SCALING_FACTOR.y);
 							}
-							System.out.println("going on");
 							
 						} else {
-							System.out.println("stopped");
 							//vol, stop laser
 							endLaserX = currentX+1;
 							break;
@@ -149,7 +146,6 @@ public class AutoTurret implements StaticObject, Collidable, Updateable{
 				}
 			}
 		} else {
-			System.out.println(disableTime);
 			disableTime -= delta;
 			if(disableTime<=0){
 				disabled = false;
@@ -171,6 +167,7 @@ public class AutoTurret implements StaticObject, Collidable, Updateable{
 	public void hit2() {
 		Game.addExplosion(new Explosion(position));
 		Game.addExplosion(new Explosion(new Vector2(position.x, position.y-32)));
+		Field.removeFromAllLists(this);
 		Field.setField(new Vector2((int)(position.x/32), 33-(int)(position.y/32)), null);
 	}
 }
