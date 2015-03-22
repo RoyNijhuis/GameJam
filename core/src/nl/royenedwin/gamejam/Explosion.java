@@ -12,7 +12,8 @@ public class Explosion implements StaticObject, Updateable{
 	public static final String TEXTURE_PATH3 = "explosion3.png";
 	public static final String TEXTURE_PATH4 = "explosion4.png";
 	public static final String TEXTURE_PATH5 = "explosion5.png";
-	private static Sprite sprite = new Sprite(new Texture(TEXTURE_PATH1));
+	private Sprite sprite = new Sprite(new Texture(TEXTURE_PATH1));
+	private int lastTexture=0;
 	private Vector2 position;
 	private long timeSinceLastImage;
 	
@@ -35,18 +36,25 @@ public class Explosion implements StaticObject, Updateable{
 	}
 
 	public void update(float delta) {
-		if(System.currentTimeMillis() - timeSinceLastImage > 500) {
+		if(System.currentTimeMillis() - timeSinceLastImage > 50) {
 			timeSinceLastImage = System.currentTimeMillis();
-			if(sprite.getTexture().equals(TEXTURE_PATH1)) {
-				sprite = new Sprite(new Texture(TEXTURE_PATH2));
-			} else if(sprite.getTexture().equals(TEXTURE_PATH2)) {
-				sprite = new Sprite(new Texture(TEXTURE_PATH3));
-			} else if(sprite.getTexture().equals(TEXTURE_PATH3)) {
-				sprite = new Sprite(new Texture(TEXTURE_PATH4));
-			} else if(sprite.getTexture().equals(TEXTURE_PATH4)) {
-				sprite = new Sprite(new Texture(TEXTURE_PATH5));
-			} else if(sprite.getTexture().equals(TEXTURE_PATH5)) {
+			if(lastTexture == 0) {
 				sprite = new Sprite(new Texture(TEXTURE_PATH1));
+				lastTexture = 1;
+			} else if(lastTexture == 1) {
+				sprite = new Sprite(new Texture(TEXTURE_PATH2));
+				lastTexture = 2;
+			} else if(lastTexture == 2) {
+				sprite = new Sprite(new Texture(TEXTURE_PATH3));
+				lastTexture = 3;
+			} else if(lastTexture == 3) {
+				sprite = new Sprite(new Texture(TEXTURE_PATH4));
+				lastTexture = 4;
+			} else if(lastTexture == 4) {
+				sprite = new Sprite(new Texture(TEXTURE_PATH5));
+				lastTexture = 5;
+			} else if(lastTexture == 5) {
+				//stop
 			}
 		}
 	}

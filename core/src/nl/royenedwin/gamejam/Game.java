@@ -22,6 +22,7 @@ public class Game implements Screen{
 	private static boolean spawnGhost;
 	private static Ghost ghost;
 	private static ArrayList<Object> objects;
+	private static ArrayList<Explosion> explosions;
 	private static Sound sound;
 	private static ArrayList<Object> remove;
 	private static Main main;
@@ -38,6 +39,7 @@ public class Game implements Screen{
 	public void show () {
 		SCALING_FACTOR = new Vector2(Gdx.graphics.getWidth()/1920f, Gdx.graphics.getHeight()/1088f);
 		objects = new ArrayList<Object>();
+		explosions = new ArrayList<Explosion>();
 		remove = new ArrayList<Object>();
 		batch = new SpriteBatch();
 		field1 = new Field(level);
@@ -58,7 +60,7 @@ public class Game implements Screen{
 	}
 	
 	public static void addExplosion(Explosion e) {
-		objects.add(e);
+		explosions.add(e);
 	}
 	
 	public static void kill() {
@@ -147,6 +149,10 @@ public class Game implements Screen{
 			if(o instanceof Drawable) {
 				((Drawable) o).render(batch);
 			}
+		}
+		for(Explosion e: explosions) {
+			e.update(delta);
+			e.render(batch);
 		}
 		for(Object o: remove){
 			objects.remove(o);
