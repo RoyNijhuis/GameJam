@@ -153,7 +153,7 @@ public class Field implements Drawable, Updateable{
 	public static void removeObjectFromField(Object o) {
 		for(int x=0;x<60;x++) {
 			for(int y=0;y<34;y++) {
-				if(fields[x][y].equals(o)) {
+				if(fields[x][y]!=null && fields[x][y].equals(o)) {
 					fields[x][y] = null;
 				}
 			}
