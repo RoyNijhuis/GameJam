@@ -114,7 +114,18 @@ public class Field implements Drawable, Updateable{
 						collidingObjects.add((Collidable) fields[x][y]);
 						fields[x+1][y] = new FullWalk();
 						
-					} else {
+					}  else if(color.r==0.14117648f && color.g==0.05882353f && color.b == 0.22352941f) {
+						//dark purple => rocket launcher
+						fields[x][y] = new RocketLauncher();
+						collidingObjects.add((Collidable) fields[x][y]);
+						updateableObjects.add((Updateable) fields[x][y]);
+						fields[x+1][y] = new FullWalk();
+						fields[x+2][y] = new FullWalk();
+						fields[x][y+1] = new FullWalk();
+						fields[x+1][y+1] = new FullWalk();
+						fields[x+2][y+1] = new FullWalk();
+					}
+						else {
 						if(!(fields[x][y] instanceof FullWalk) && !(fields[x][y] instanceof FullNotWalk)) {
 							fields[x][y] = null;
 						}
