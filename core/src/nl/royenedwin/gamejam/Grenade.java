@@ -90,6 +90,35 @@ public class Grenade implements MoveableObject, RandomItem{
 				}
 			}
 		}
+		
+		set = Field.getCollidingObjects2();
+		location = position;
+		v2 =new Vector2(location.x+64,location.y);
+		v4 =new Vector2(location.x+32,location.y);
+		v3 =new Vector2(location.x-32,location.y);
+		for(Collidable x: set){
+			if(x instanceof Mine) {
+				Mine p = (Mine) x;
+				System.out.println(p.getPosition());
+				if(p.getPosition()!=null && (int)(position.x/32) == (int)(p.getPosition().x/32) && (int)(position.y/32) == (int)(p.getPosition().y/32)){
+					p.hit2();
+					Game.removeObject(this);
+					sound.play();
+				} else if(p.getPosition()!=null && (int)(position.x/32) == (int)(p.getPosition().x/32)+1 && (int)(position.y/32) == (int)(p.getPosition().y/32)){
+					p.hit2();
+					Game.removeObject(this);
+					sound.play();
+				} else if(p.getPosition()!=null && (int)(position.x/32) == (int)(p.getPosition().x/32) && (int)(position.y/32) == (int)(p.getPosition().y/32)+1){
+					p.hit2();
+					Game.removeObject(this);
+					sound.play();
+				} else if(p.getPosition()!=null && (int)(position.x/32) == (int)(p.getPosition().x/32)+1 && (int)(position.y/32) == (int)(p.getPosition().y/32)+1){
+					p.hit2();
+					Game.removeObject(this);
+					sound.play();
+				}
+			}
+		}
 	}
 
 	@Override

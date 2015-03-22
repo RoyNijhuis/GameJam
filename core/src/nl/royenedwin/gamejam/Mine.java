@@ -54,6 +54,12 @@ public class Mine implements StaticObject, Collidable, Updateable {
 	@Override
 	public Vector2 getPosition() {
 		// TODO Auto-generated method stub
-		return null;
+		return position;
+	}
+	
+	public void hit2(){
+		Game.addExplosion(new Explosion(position));
+		sound.play();
+		Field.removeObjectFromField(this);
 	}
 }
