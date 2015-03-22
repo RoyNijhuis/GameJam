@@ -53,12 +53,13 @@ public class AutoTurret implements StaticObject, Collidable, Updateable{
 						
 					} else {
 						//vol, stop laser
+						System.out.println("currentX+1: " + Field.getFields()[currentX][33-y]);
 						endLaserX = currentX-1;
 						break;
 					}
 				}
 			} else {
-				for(int currentX=x; currentX>0; currentX--) {
+				for(int currentX=x; currentX>=0; currentX--) {
 					if(!Field.fieldIsFull2(currentX, y)) {
 						//niet vol, draw laser
 						if(currentX == x) {
@@ -69,11 +70,13 @@ public class AutoTurret implements StaticObject, Collidable, Updateable{
 						
 					} else {
 						//vol, stop laser
+						System.out.println("currentX+1: " + Field.getFields()[currentX][33-y]);
 						endLaserX = currentX+1;
 						break;
 					}
 				}
 			}
+			System.out.println(endLaserX);
 		} else {
 			
 			//batch.draw(sprite, pickedUp.getPositionPixels().x*Game.SCALING_FACTOR.x, pickedUp.getPositionPixels().y*Game.SCALING_FACTOR.y, sprite.getWidth()*Game.SCALING_FACTOR.x, sprite.getHeight()*Game.SCALING_FACTOR.y);
