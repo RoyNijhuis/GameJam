@@ -383,6 +383,10 @@ public class Mario implements MoveableObject{
 			c++;
 			batch.draw(z.getSprite(), 1900*Game.SCALING_FACTOR.x - 74*c*Game.SCALING_FACTOR.x, 10, z.getSprite().getWidth()*Game.SCALING_FACTOR.x, z.getSprite().getHeight()*Game.SCALING_FACTOR.y);
 		}
+		Sprite auto = new Sprite(new Texture(AutoTurret.TEXTURE_PATH));
+		if(isCarryingTurret()) {
+			batch.draw(auto, getPositionPixels().x*Game.SCALING_FACTOR.x, getPositionPixels().y*Game.SCALING_FACTOR.y, auto.getWidth()*Game.SCALING_FACTOR.x, auto.getHeight()*Game.SCALING_FACTOR.y);
+		}
 
 		if(lastFacedDirectionIsLeft) {
 			if(!sprite.isFlipX()) {
