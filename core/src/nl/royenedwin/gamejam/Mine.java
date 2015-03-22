@@ -2,6 +2,8 @@ package nl.royenedwin.gamejam;
 
 import java.util.Random;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -11,13 +13,16 @@ public class Mine implements StaticObject, Collidable, Updateable {
 	public static final String TEXTURE_PATH = "mine.png";
 	private static Sprite sprite = new Sprite(new Texture(TEXTURE_PATH));
 	private Vector2 position;
+	private Sound sound;
 	
 	public Mine() {
-
+		sound = Gdx.audio.newSound(Gdx.files.internal("bang.wav"));
+		
 	}
 	
 	public void setPosition(Vector2 position) {
 		this.position = position;
+		
 	}
 	
 	@Override
@@ -26,6 +31,9 @@ public class Mine implements StaticObject, Collidable, Updateable {
 	}
 
 	public void isTouched(Object o) {
+		//TODO BOOOOOOOOOOOOOOM
+		sound.play();
+		Field.removeObjectFromField(this);
 		
 	}
 
