@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 public class Game implements Screen{
-	public static final String BACKGROUND_PATH = "background2.jpg";
+	public static final String BACKGROUND_PATH = "background0.jpg";
 	private SpriteBatch batch;
 	private Sprite background;
 	private static Field field1;
@@ -50,6 +50,8 @@ public class Game implements Screen{
 	
 	public static void kill() {
 		field1 = null;
+		//TODO draw screen
+		//TODO sleep
 		main.setScreen(new MainMenu(main));
 		sound.stop();
 		sound.dispose();
@@ -130,5 +132,13 @@ public class Game implements Screen{
 		}
 		remove.clear();
 		batch.end();
+	}
+
+	public static void restart() {
+		//TODO draw screen
+		//TODO sleep
+		main.setScreen(new Game(main, level));
+		sound.stop();
+		sound.dispose();
 	}
 }
